@@ -1,0 +1,43 @@
+/* Center align the pagination controls */
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
+  
+  /* Style the previous and next buttons */
+  /* .custom-pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin: 0 8px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+   */
+  /* Disable previous and next buttons when not clickable */
+  .custom-pagination button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Style the page number text */
+  .custom-pagination span {
+    font-size: 18px;
+  }
+  
+
+  .custom-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* .pagination-controls {
+    flex: 1; 
+  } */
+  

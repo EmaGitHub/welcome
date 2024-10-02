@@ -1,0 +1,14 @@
+.form-group {
+    display: flex;
+    flex-direction: column; 
+}
+.customButtonStyle{
+    border: 1px solid  #0152e8;
+    color: #0152e8;
+    width: 150px;
+
+}
+.customButtonStylePrimary{
+    width: 150px;
+
+}

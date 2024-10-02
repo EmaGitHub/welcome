@@ -1,0 +1,56 @@
+<app-page-title customTitle="availableServiceCards.sitesManagement" subtitle="availableServiceCards.sitesManagementSubtitle"></app-page-title>
+
+<div class="bg-light-grey py-4">
+    <div class="container">
+        <div class="row">
+            <!-- Select site -->
+            <div class="col-12 col-md-6">
+                <form>
+                    <div class="d-flex flex-column">
+                        <mat-label class="custom-label">{{'generic.site' | translate}}</mat-label>
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="{{'generic.selectSite' | translate}}" [value]="selectedSite" (valueChange)="onSelectSite($event)">
+                                <app-text-filter-select (filter)="filterSiteList($event)"></app-text-filter-select>
+                                <mat-option *ngFor="let availableSite of filteredAvailableSites" [value]="availableSite.idSite">
+                                    <b>{{availableSite.idArchibus}}</b> - {{availableSite.address}}, {{availableSite.city | titlecase}}, {{availableSite.country}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-icon matSuffix color="primary">expand_more</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Building Manager section -->
+            <div *ngIf="selectedSite" class="col-12 col-md-4 offset-md-2">
+                <div class="d-flex flex-column justify-content-center h-100">
+                    <div *ngIf="buildingManager; else addBuildingManager">
+                        <p class="custom-label">Building Manager</p>
+                        <div class="d-flex align-items-center">
+                            <!--img src="assets/images/welcom-e-banner.png" class="avatar me-2" aria-hidden="true"-->
+                            <div class="me-2">{{buildingManager.first_name}} {{buildingManager.last_name}}</div>
+                            <button mat-icon-button color="primary" (click)="openBuildingManagerSelectionDialog(buildingManager)"
+                                    ngbTooltip="{{'sitesManagement.editBuildingManager' | translate}}"
+                                    [attr.aria-label]="'sitesManagement.editBuildingManager' | translate">
+                                <mat-icon class="ei-edit w-auto h-auto fs-5"></mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" (click)="deleteBuildingManager()"
+                                    ngbTooltip="{{'sitesManagement.deleteBuildingManager' | translate}}"
+                                    [attr.aria-label]="'sitesManagement.deleteBuildingManager' | translate">
+                                <mat-icon class="ei-bin w-auto h-auto fs-5"></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <ng-template #addBuildingManager>
+                        <button mat-stroked-button (click)="openBuildingManagerSelectionDialog()" color="primary" class="border-primary bg-white py-2">
+                            {{'generic.addBuildingManager' | translate}}
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-services-section></app-services-section>

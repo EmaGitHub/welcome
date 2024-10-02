@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-12 d-flex flex-row justify-content-end">
+        <button mat-stroked-button color="primary" class="py-2" [disabled]="selection.selected.length === 0" (click)="deleteAdminList()">{{'generic.delete' | translate}}</button>
+    </div>
+    <div class="col-12 py-4">
+        <mat-table mat-table [dataSource]="dataSource" class="table w-100" role="table">
+
+            <ng-container matColumnDef="userId">
+                <mat-header-cell *matHeaderCellDef>
+                    <div>
+                        <span class="d-flex flex-row gap-3">
+                             <mat-checkbox (change)="$event ? masterToggle() : null"
+                                           [checked]="selection.hasValue() && isAllSelected()"
+                                           color="primary"
+                                           [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                           [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                            <span>Matricola</span>
+                        </span>
+                    </div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div class="transparent">
+                        <span class="d-flex flex-row gap-3">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                          color="primary"
+                                          (change)="$event ? selection.toggle(element) : null"
+                                          [checked]="selection.isSelected(element)"
+                                          [aria-label]="checkboxLabel(element)">
+                            </mat-checkbox>
+                            <span >{{element.userId}}</span>
+                        </span>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>{{'generic.name' | translate}}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+                <mat-header-cell *matHeaderCellDef>{{'generic.surname' | translate}}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="site">
+                <mat-header-cell *matHeaderCellDef> {{'generic.site' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.siteAddress}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="country">
+                <mat-header-cell *matHeaderCellDef> {{'generic.country' | translate}} </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.country}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row" class="d-flex flex-row justify-content-end">
+                    <div class="transparent">
+                        <span>
+                            <button mat-icon-button (click)="deleteAdmin(row)"
+                                    ngbTooltip="{{'generic.delete' | translate}}"
+                                    [attr.aria-label]="'generic.delete' | translate">
+                                <mat-icon color="primary" class="ei-bin"></mat-icon>
+                            </button>
+                        </span>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
+

@@ -1,0 +1,18 @@
+<app-page-title customTitle="strennaForm.strenne"></app-page-title>
+
+<div class="container mb-4">
+    <p class="color-grey py-4">{{'strennaForm.subtitle' | translate}}</p>
+    <div class="d-grid gap-5 d-md-flex justify-content-md-end">
+        <button mat-flat-button color="primary" class="py-2" [disabled]="reminderButton" (click)="onClickCallReminder()"> 
+            {{ 'strennaForm.reminder' | translate }}
+        </button>
+        <button mat-flat-button color="primary" class="py-2" (click)="addStrenna()">
+            {{'strennaForm.addStrenna' | translate}}
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="container w-100">
+    <app-expansion-panel-filters (searchStrenna)="searchStrenna($event)"></app-expansion-panel-filters>
+    <app-receiver-list (changeSelected)="toggleButton($event)"></app-receiver-list>
+</div>

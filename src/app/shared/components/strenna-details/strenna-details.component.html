@@ -1,0 +1,223 @@
+<div class="container" style="height: 80vh;">
+<div class="row w-80">
+  <div class="col py-5">
+    <div class="d-flex">
+      <div class="col-md-2 mb-3 d-flex py-5 justify-content-center align-items-center">
+        <a routerLink="/strenne-management" class="d-flex align-items-center text-decoration-none">
+          <mat-icon class="me-2">chevron_left</mat-icon>{{'strennaForm.goBack' | translate}}
+        </a>
+      </div>
+
+    </div>
+    <div class="row justify-content-center align-items-center">
+
+
+
+
+      <div class="col-md-5 mb-3 justify-content-start">
+        <h1 class="fw-bold mt-3">{{ 'strennaForm.detailsStrenna' | translate }}</h1>
+        <p class="color-grey mt-3">{{ subtitle | translate }}</p>
+      </div>
+
+
+
+      <div class="col-md-3 mb-3 d-flex justify-content-end align-items-end">
+        <div class="d-flex justify-content-end align-items-end">
+          <button mat-icon-button ngbTooltip="{{'generic.edit' | translate}}"
+            [attr.aria-label]="'generic.edit' | translate" (click)="navigateToEdit(strenna.id_strenna)"
+            [disabled]="checkElementDisabled(strenna)">
+            <mat-icon
+              [ngStyle]="{'color': checkElementDisabled(strenna) ? 'grey' : '#0152e8'}"
+              class="ei-edit">
+            </mat-icon>
+          </button>
+          <button mat-icon-button ngbTooltip="{{'generic.delete' | translate}}"
+            [attr.aria-label]="'generic.delete' | translate" (click)="onClickDeleteStrenna(strenna.id_strenna)"
+            [disabled]="checkElementDisabled(strenna)" *ngIf="isStrennaAdmin">
+            <mat-icon
+              [ngStyle]="{'color': checkElementDisabled(strenna) ? 'grey' : '#0152e8'}"
+              class="ei-bin"> </mat-icon>
+          </button>
+        </div>
+      </div>
+
+
+
+
+      <div class="col-md-3 mb-3 d-flex justify-content-start align-items-end">
+        <div class="d-flex justify-content-start align-items-start">
+          <button mat-flat-button class="py-2 myColor" style="margin-right: 20px"
+            [disabled]="checkElementDisabled(strenna)"
+            (click)="onClickCallReject()">{{ 'strennaForm.refusedStrenna' | translate }}</button>
+          <button mat-flat-button class="py-2 myColor"
+            [disabled]="checkElementDisabled(strenna) || recipient.is_director_or_board === true"
+            (click)="onClickCallReminder()">{{'strennaForm.solicit' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="p-3 mb-2 bg-light" style="height: 100%;">
+  <div class="row d-flex flex-row w-100  justify-content-between">
+    <div class="container">
+      <div class="row justify-content-center">
+        
+       <!-- inizio card di riepilogo a sinistra -->
+        <div class="card border-0 shadow rounded-custom" style="width: 30%; height: 500px;">
+          <ul class="list-group list-group-flush vertical-align-list"
+            style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary ">{{'strennaForm.id' | translate}}</span>
+              <span class="text-dark">{{strenna.id_strenna}}</span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary" style="width: 50%;">{{'strennaForm.recipient' | translate}}</span>
+              <span class="text-dark" style="word-wrap: break-word; text-align: right;">{{recipient.user_name}}
+                {{recipient.user_surname}}</span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary">{{'strennaForm.isDirector' | translate}}</span>
+              <span class="text-dark">
+                {{((recipient.is_director_or_board == null || recipient.is_director_or_board == false)?
+                'strennaForm.no' : 'strennaForm.yes') | translate}}
+              </span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary">{{'strennaForm.sender' | translate}}</span>
+              <span class="text-dark">{{strenna.sender}}</span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary">{{'strennaForm.dateOfReceipt' | translate}}</span>
+              <span class="text-dark">{{formatData(strenna.date)}}</span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between">
+              <span class="text-primary">{{'strennaForm.warehouseLocation' | translate}}</span>
+              <span class="text-dark">{{strenna.stock_position}}</span>
+            </li>
+            <li class="list-group-item px-3 d-flex justify-content-between vertical-align-list">
+              <span class="text-primary">{{'strennaForm.status' | translate}}</span>
+              <span [ngStyle]="{'color': 
+                strenna.status === 'delivered' ? 'green' : 
+                strenna.status === 'toBeWithdrawn' ? 'blue' : 
+                strenna.status === 'toBeManaged' ? 'orange' : 
+                strenna.status === 'refused' ? 'grey' : 
+                strenna.status === 'donated' ? 'brown' : 
+                strenna.status === 'cancelled' ? 'red' :  
+                'black'}">
+                <span style="font-size: 12px; vertical-align :middle">●</span>
+                {{'strennaForm.'+strenna.status | translate}}</span>
+            </li>
+          </ul>
+        </div>
+          <!-- fine card di riepilogo a sinistra -->
+
+
+
+        <div class="col-lg-6" style="width: 60%;padding-left: 50px;">
+          <div class="row mt-3">
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.description' | translate}}</p>
+              <p>{{'strennaForm.'+strenna.type | translate}}</p>
+
+            </div>
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.perisheable' | translate}}</p>
+              <p>
+                {{ ((strenna.perisheable == false)? 'strennaForm.no' : 'strennaForm.yes') | translate}}
+              </p>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.deliveryMethod' | translate}}</p>
+
+              <p *ngIf="strenna.courier">
+                {{ 'strennaForm.'+strenna.method | translate }} - {{ strenna.courier }}
+              </p>
+              <p *ngIf="!strenna.courier">
+                {{ 'strennaForm.'+strenna.method | translate }}
+              </p>
+
+            </div>
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.bulky' | translate}}</p>
+              <p>
+                {{ ((strenna.bulky == false)? 'strennaForm.no' : 'strennaForm.yes' ) | translate}}
+              </p>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.waybill' | translate}}</p>
+              <p>{{strenna.lettura_vettura}}</p>
+            </div>
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.senderCity' | translate}}</p>
+              <p>{{strenna.sender_city}}</p>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="form-group w-50">
+              <p class="custom-label">{{'strennaForm.note' | translate}}</p>
+              <p>{{strenna.note}}</p>
+            </div>
+          </div>
+          <div class="section">
+            <p class="custom-label">{{'strennaForm.indicationToWithdraw' | translate}}</p>
+            <hr>
+            <div class="row mt-3">
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.emailDate' | translate}}</p>
+                <p>{{formatData(strenna.send_mail_date)}}</p>
+              </div>
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.solicitDate' | translate}} </p>
+                <p>{{formatData(strenna.reminder_date)}}</p>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.withdrawManage' | translate}} </p>
+                <p>{{'strennaForm.'+response.handling | translate}}</p> 
+              </div>
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.delegateColleague' | translate}} </p>
+
+                <p *ngIf="response.delegate">
+                  {{response.delegate}} - {{response.delegate_name}} {{ response.delegate_surname}}
+                </p>
+                <p *ngIf="!response.delegate"> - </p>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.withdrawDate' | translate}}</p>
+                <p>{{formatData(response.withdrawal_date)}}</p>
+              </div>
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.withdrawHour' | translate}} </p>
+                <p>{{response.withdrawal_hour}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <p class="custom-label">{{'strennaForm.withdraw' | translate}}</p>
+            <hr>
+            <div class="row mt-3">
+              <div class="form-group w-50">
+                <p class="custom-label">{{'strennaForm.date' | translate}}</p>
+                <p>{{formatData(response.actual_withdrawal_date)}}</p>
+              </div>
+              <div class="form-group w-50">
+                <p class="custom-label" label>{{'strennaForm.withdrawTo' | translate}} </p>
+                <p>{{response.user_id_withdrawal_strenna}} - {{response.user_name_withdrawal_strenna}} {{response.user_surname_withdrawal_strenna}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

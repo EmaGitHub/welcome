@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-10">
+    <div class="custom-pagination">
+      <button type="button" class="btn btn-outline-primary" (click)="goToPage(currentPage - 1)"
+        [disabled]="currentPage === 1">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <span>{{ currentPage }} / {{ totalPages }}</span>
+      <button type="button" class="btn btn-outline-primary" (click)="goToPage(currentPage + 1)"
+        [disabled]="currentPage === totalPages">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-2"> <select class="form-select align-middle" id="rows-per-page-select" [(ngModel)]="selectedPageSize"  type="number"
+      (change)="changePageSize(selectedPageSize)" style="margin-top: 10px;">
+      <option *ngFor="let pageSizeOption of pageSizeOptions" [value]="pageSizeOption">{{ pageSizeOption }}</option>
+    </select></div>
+</div>

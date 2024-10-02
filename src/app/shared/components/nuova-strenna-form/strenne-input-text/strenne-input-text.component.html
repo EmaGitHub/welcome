@@ -1,0 +1,26 @@
+<div class="d-flex flex-column" *ngIf="!isDisabled; else elseBlock">
+    <mat-label class="custom-label">{{ textLabel | translate}}<span *ngIf="isRequiredSpan">*</span></mat-label>
+    <mat-form-field appearance="outline">
+            <input matInput 
+            [formControl]="controlName?formService.getControl(controlName) : formControl" 
+            placeholder="{{'strennaForm.clickHere' | translate}}" 
+            [id]="elementId">
+    </mat-form-field>
+</div>
+
+<ng-template #elseBlock>
+    <div class="d-flex flex-column">
+        <mat-label class="custom-label">{{ textLabel | translate}}</mat-label>
+        <mat-form-field appearance="fill" >
+                <input matInput 
+                placeholder="{{'strennaForm.fieldNotAvelaible' | translate}}" 
+
+                [id]="elementId"
+                [disabled]="true"
+               >
+        </mat-form-field>
+    </div>
+</ng-template>
+
+
+

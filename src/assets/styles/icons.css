@@ -1,0 +1,419 @@
+@font-face {
+    font-family: 'enel-icon';
+    src:  url('fonts/icons/enel-icon.eot?u35a9b');
+    src:  url('fonts/icons/enel-icon.eot?u35a9b#iefix') format('embedded-opentype'),
+    url('fonts/icons/enel-icon.ttf?u35a9b') format('truetype'),
+    url('fonts/icons/enel-icon.woff?u35a9b') format('woff'),
+    url('fonts/icons/enel-icon.svg?u35a9b#enel-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'strenne-icon';
+    src:  url('fonts/strenne-icon/strenne-icon.eot?u35a9b');
+    src:  url('fonts/strenne-icon/strenne-icon.eot?u35a9b#iefix') format('embedded-opentype'),
+    url('fonts/strenne-icon/strenne-icon.ttf?u35a9b') format('truetype'),
+    url('fonts/strenne-icon/strenne-icon.woff?u35a9b') format('woff'),
+    url('fonts/strenne-icon/strenne-icon.svg?u35a9b#enel-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: 'sds-icon';
+    src:  url('fonts/sds-icon/sds-icon.eot?u35a9b');
+    src:  url('fonts/sds-icon/sds-icon.eot?u35a9b#iefix') format('embedded-opentype'),
+    url('fonts/sds-icon/sds-icon.ttf?u35a9b') format('truetype'),
+    url('fonts/sds-icon/sds-icon.woff?u35a9b') format('woff'),
+    url('fonts/sds-icon/sds-icon.svg?u35a9b#enel-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="ei-"], [class*=" ei-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'enel-icon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+[class^="strenne-"], [class*=" strenne-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'strenne-icon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+[class^="sds-"], [class*=" sds-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'sds-icon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.ei-contacts:before {
+    content: "\e91e";
+  }
+  .ei-take_away:before {
+    content: "\e928";
+  }
+  .ei-vending_machines-18:before {
+    content: "\e93a";
+  }
+  .ei-work_spaces_reservation-11:before {
+    content: "\e94b";
+  }
+  .ei-activities:before {
+    content: "\e94c";
+  }
+  .ei-atm:before {
+    content: "\e94d";
+  }
+  .ei-car_sharing:before {
+    content: "\e94e";
+  }
+  .ei-car_wash:before {
+    content: "\e94f";
+  }
+  .ei-clothing_collection:before {
+    content: "\e950";
+  }
+  .ei-clothing_rooms_footwar:before {
+    content: "\e951";
+  }
+  .ei-clothing_rooms:before {
+    content: "\e952";
+  }
+  .ei-contatti:before {
+    content: "\e953";
+  }
+  .ei-meeting_room:before {
+    content: "\e954";
+  }
+  .ei-minimarket:before {
+    content: "\e955";
+  }
+  .ei-nursery:before {
+    content: "\e956";
+  }
+  .ei-officemap:before {
+    content: "\e957";
+  }
+  .ei-other_work_spaces:before {
+    content: "\e958";
+  }
+  .ei-post:before {
+    content: "\e959";
+  }
+  .ei-bin:before {
+    content: "\e900";
+  }
+  .ei-booking:before {
+    content: "\e901";
+  }
+  .ei-building:before {
+    content: "\e902";
+  }
+  .ei-bus:before {
+    content: "\e903";
+  }
+  .ei-business:before {
+    content: "\e904";
+  }
+  .ei-calendar:before {
+    content: "\e905";
+  }
+  .ei-card:before {
+    content: "\e906";
+  }
+  .ei-car-wash:before {
+    content: "\e907";
+  }
+  .ei-clock:before {
+    content: "\e908";
+  }
+  .ei-disabled:before {
+    content: "\e909";
+  }
+  .ei-disabled-needs:before {
+    content: "\e90a";
+  }
+  .ei-doctor:before {
+    content: "\e90b";
+  }
+  .ei-drink:before {
+    content: "\e90c";
+  }
+  .ei-edit:before {
+    content: "\e90d";
+  }
+  .ei-electric-column:before {
+    content: "\e90e";
+  }
+  .ei-feedback:before {
+    content: "\e90f";
+  }
+  .ei-finance:before {
+    content: "\e910";
+  }
+  .ei-focal-point:before {
+    content: "\e911";
+  }
+  .ei-health:before {
+    content: "\e912";
+  }
+  .ei-heart:before {
+    content: "\e913";
+  }
+  .ei-heart-hand:before {
+    content: "\e914";
+  }
+  .ei-idea:before {
+    content: "\e915";
+  }
+  .ei-info:before {
+    content: "\e916";
+  }
+  .ei-info-o:before {
+    content: "\e917";
+  }
+  .ei-investments:before {
+    content: "\e918";
+  }
+  .ei-location:before {
+    content: "\e919";
+  }
+  .ei-locker-room:before {
+    content: "\e91a";
+  }
+  .ei-mail:before {
+    content: "\e91b";
+  }
+  .ei-mail-focal-point:before {
+    content: "\e91c";
+  }
+  .ei-medications:before {
+    content: "\e91d";
+  }
+  .ei-mending:before {
+    content: "\e91f";
+  }
+  .ei-menu:before {
+    content: "\e920";
+  }
+  .ei-menu-weekly:before {
+    content: "\e921";
+  }
+  .ei-meter:before {
+    content: "\e922";
+  }
+  .ei-notes:before {
+    content: "\e924";
+  }
+  .ei-nutritionist:before {
+    content: "\e926";
+  }
+  .ei-observations:before {
+    content: "\e927";
+  }
+  .ei-package:before {
+    content: "\e943";
+  }
+  .ei-parking:before {
+    content: "\e929";
+  }
+  .ei-parking-underground:before {
+    content: "\e92a";
+  }
+  .ei-phone:before {
+    content: "\e92b";
+  }
+  .ei-phone-focal-point:before {
+    content: "\e92c";
+  }
+  .ei-pin:before {
+    content: "\e92d";
+  }
+  .ei-reception:before {
+    content: "\e92e";
+  }
+  .ei-restaurant:before {
+    content: "\e92f";
+  }
+  .ei-salad:before {
+    content: "\e930";
+  }
+  .ei-settings:before {
+    content: "\e931";
+  }
+  .ei-shirt:before {
+    content: "\e932";
+  }
+  .ei-shoe:before {
+    content: "\e933";
+  }
+  .ei-silverware2:before {
+    content: "\e934";
+  }
+  .ei-silverware3:before {
+    content: "\e935";
+  }
+  .ei-silverware:before {
+    content: "\e936";
+  }
+  .ei-special-needs:before {
+    content: "\e937";
+  }
+  .ei-stretching:before {
+    content: "\e938";
+  }
+  .ei-supplier:before {
+    content: "\e939";
+  }
+  .ei-travel:before {
+    content: "\e93b";
+  }
+  .ei-url:before {
+    content: "\e93c";
+  }
+  .ei-user:before {
+    content: "\e93d";
+  }
+  .ei-vending_machines:before {
+    content: "\e93e";
+  }
+  .ei-welfare:before {
+    content: "\e93f";
+  }
+  .ei-work_spaces_reservation:before {
+    content: "\e940";
+  }
+  .ei-wrench:before {
+    content: "\e941";
+  }
+  .ei-accompaniment:before {
+    content: "\e942";
+  }
+  .ei-attachment:before {
+    content: "\e944";
+  }
+  .ei-auditorium:before {
+    content: "\e945";
+  }
+  .ei-bar:before {
+    content: "\e946";
+  }
+  .ei-bear:before {
+    content: "\e947";
+  }
+  .ei-biberon:before {
+    content: "\e95a";
+  }
+  .ei-bike:before {
+    content: "\e949";
+  }
+  .ei-bike-sharing:before {
+    content: "\e94a";
+  }
+  
+  
+  
+/*##################################################################################### INIZIO ICONE STRENNE #####################################################################################*/
+
+.strenne-details:before{
+    content: "\e900";
+}
+.strenne-filter:before{
+    content: "\e901";
+}
+.strenne-gift:before{
+    content: "\e902";
+}
+.strenne-history:before{
+    content: "\e903";
+}
+
+/*##################################################################################### INIZIO ICONE SERVIZI DI SEDE #####################################################################################*/
+.sds-contatti:before {
+    content: "\e902";
+  }
+  .sds-clothing_collection:before {
+    content: "\e900";
+  }
+  .sds-clothing_rooms_footwar:before {
+    content: "\e901";
+  }
+  .sds-officemap:before {
+    content: "\e90a";
+  }
+  .sds-clothing_rooms:before {
+    content: "\e90f";
+  }
+  .sds-activities:before {
+    content: "\e911";
+  }
+  .sds-post:before {
+    content: "\e912";
+  }
+  .sds-other_work_spaces:before {
+    content: "\e917";
+  }
+  .sds-atm:before {
+    content: "\e919";
+  }
+  .sds-work_spaces_reservation:before {
+    content: "\e920";
+  }
+  .sds-take_away:before {
+    content: "\e921";
+  }
+  .sds-nursery:before {
+    content: "\e925";
+  }
+  .sds-minimarket:before {
+    content: "\e928";
+
+  }
+  .sds-meeting_room:before {
+    content: "\e92b";
+
+  }
+  .sds-car_sharing:before {
+    content: "\e92f";
+
+  }
+  .sds-car_wash:before {
+    content: "\e930";
+
+  }
+  .sds-vending_machines:before {
+    content: "\e932";
+
+  }
+  

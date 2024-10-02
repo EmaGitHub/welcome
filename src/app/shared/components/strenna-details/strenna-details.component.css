@@ -1,0 +1,32 @@
+.rounded-custom {
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.vertical-align-list li {
+  display: flex;
+  align-items: center;
+}
+
+.right-content {
+  width: 70%;
+}
+
+.word {
+  font-size: calc(.5vw + 1vh);
+}
+
+p.bold {
+  font-weight: bold;
+
+}
+
+.section {
+  padding-top: 35px;
+}
+
+.myColor {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(1, 82, 232);
+}

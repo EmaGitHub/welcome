@@ -1,0 +1,30 @@
+<app-page-title customTitle="adminsManagement.title"></app-page-title>
+
+<div class="container mb-4">
+    <div class="d-flex flex-row">
+        <mat-tab-group mat-align-tabs="start"  (selectedTabChange)="changeTab($event)" *ngIf="userRoles.isGlobalAdmin">
+            <mat-tab label="{{'adminsManagement.siteAdmins' | translate}}" id="{{adminsManagementType.SITE}}">
+            </mat-tab>
+            <mat-tab label="{{'adminsManagement.countryAdmins' | translate}}" id="{{adminsManagementType.COUNTRY}}">
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <p class="color-grey py-4">{{'adminsManagement.subtitle' | translate}}</p>
+    <div class="d-flex flex-row justify-content-end align-items-end">
+        <button mat-flat-button color="primary" class="py-2" (click)="addAdmin()">
+            {{'adminsManagement.addAdmin' | translate}}
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div class="bg-light-grey py-4">
+    <div class="container">
+        <app-admins-filters (filter)="filterList($event)"></app-admins-filters>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <app-admins-table></app-admins-table>
+    <app-paginator [collectionSize]="totalCount" [(page)]="page" (pageChange)="filterList(null, $event)"></app-paginator>
+</div>

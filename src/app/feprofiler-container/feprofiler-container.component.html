@@ -1,0 +1,67 @@
+<enel-accordion>
+    <enel-accordion-item title="Get Current User">
+        <enel-button type="primary" [buttonText]="'Get Current User'" (click)="getCurrentUser(false)"></enel-button>
+        <enel-button type="tertiary"  [buttonText]="'Clear'" (click)="userData = []" style="margin-left: 10px;margin-bottom: 10px"></enel-button>
+        <span class="mt-3">
+            <enel-table *ngIf="userData" [bordered]="false">
+                <tr slot="thead">
+                    <th scope="col"><enel-th >user</enel-th></th>
+                    <th scope="col"><enel-th >name</enel-th></th>
+                    <th scope="col"><enel-th >surname</enel-th></th>
+                    <th scope="col"><enel-th >email</enel-th></th>
+                    <th scope="col"><enel-th >tenant</enel-th></th>
+                </tr>
+                <tr slot="tbody">
+                    <td>{{userData.user}}</td>
+                    <td>{{userData.name}}</td>
+                    <td>{{userData.surname}}</td>
+                    <td>{{userData.email}}</td>
+                    <td>{{userData.tenantId}}</td>
+                </tr>
+            </enel-table>
+
+        </span>
+    </enel-accordion-item>
+
+   <enel-accordion-item title="Get Current User from IDP">
+        <enel-button type="primary" [buttonText]="'Get Current User From IDP'" (click)="getCurrentUser(true)"></enel-button>
+        <enel-button type="tertiary" [buttonText]="'Clear'" (click)="userDataFromIdp = []" style="margin-left: 10px; margin-bottom: 10px"></enel-button>
+
+        <enel-table *ngIf="userDataFromIdp" [bordered]="false">
+            <tr slot="thead">
+                <th scope="col"><enel-th>user</enel-th></th>
+                <th scope="col"><enel-th>name</enel-th></th>
+                <th scope="col"><enel-th>surname</enel-th></th>
+                <th scope="col"><enel-th>email</enel-th></th>
+                <th scope="col"><enel-th>Type</enel-th></th>
+            </tr>
+            <tr slot="tbody">
+                <td>{{userDataFromIdp.user}}</td>
+                <td>{{userDataFromIdp.name}}</td>
+                <td>{{userDataFromIdp.surname}}</td>
+                <td>{{userDataFromIdp.email ? userDataFromIdp.email : 'N/A'}}</td>
+                <td>{{userDataFromIdp.employeeType ? userDataFromIdp.employeeType : 'N/A'}}</td>
+            </tr>
+        </enel-table>
+    </enel-accordion-item>
+
+        <enel-accordion-item title="User profiles">
+            <app-profile [territories]="this.territoriesCombo"></app-profile>
+        </enel-accordion-item>
+
+            <enel-accordion-item title="User territories">
+                <app-territory ></app-territory>
+            </enel-accordion-item>
+
+            <enel-accordion-item title="User activities">
+                <app-activity [territories]="this.territoriesCombo"></app-activity>
+            </enel-accordion-item>
+
+            <enel-accordion-item title="User abilitation">
+                <app-abilitation [territories]="this.territoriesCombo"></app-abilitation>
+            </enel-accordion-item>
+
+            <enel-accordion-item title="Solution Version">
+                <app-solutioninfo></app-solutioninfo>
+            </enel-accordion-item>
+</enel-accordion>

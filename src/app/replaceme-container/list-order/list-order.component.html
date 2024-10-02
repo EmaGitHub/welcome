@@ -1,0 +1,15 @@
+<enel-table [bordered]="false">
+  <tr slot="thead">
+    <th scope="col"><enel-th>#</enel-th></th>
+    <th scope="col"><enel-th>Order Id</enel-th></th>
+    <th scope="col"><enel-th>Order Description</enel-th></th>
+    <th scope="col"><enel-th>Functions</enel-th></th>
+  </tr>
+  <tr slot="tbody" *ngFor="let elem of data, let i = index">
+    <td>{{ i }}</td>
+    <td>{{ elem.orderId }}</td>
+    <td>{{ elem.customerName }}</td>
+    <td><enel-button type="primary"  [buttonText]="'Delete'" (click)="delete(elem.orderId)"></enel-button></td>
+  </tr>
+</enel-table>
+

@@ -1,0 +1,21 @@
+<app-add-service-attribute [type]="type" (buttonClicked)="addService()" (filter)="filterList($event)"></app-add-service-attribute>
+
+
+<div class="bg-light-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-3">
+                <span class="fw-bold fs-5">{{'saManagement.activeServices' | translate}}</span>
+            </div>
+            <div class="col-12">
+                <div class="row py-4">
+                    <app-service-attribute-card class="col-12 col-sm-6 col-md-4 mb-3"
+                                                *ngFor="let service of filteredServices"
+                                                (edit)="editService($event)"
+                                                (delete)="deleteService($event)"
+                                                [serviceAttribute]="getService(service)"></app-service-attribute-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

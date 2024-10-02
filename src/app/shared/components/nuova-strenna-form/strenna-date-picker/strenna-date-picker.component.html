@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline">
+    <input matInput [(ngModel)]="selectedDateOption" (ngModelChange)="handleInputChange()" [formControl]="controlName?formServiceDate.getControl(controlName) : formControl "
+      [matDatepicker]="releasedAtPicker" (click)="releasedAtPicker.open()"
+      [min] = "minDate"
+      [matDatepickerFilter]="!enableWeekend ? weekendsDatesFilter : null"
+      placeholder="{{'strennaForm.selectData' | translate}}" [id]="elementId" [disabled]="flag">
+    <mat-datepicker-toggle matSuffix [for]="releasedAtPicker" style="color: #0152e8;" >
+    </mat-datepicker-toggle>
+    <mat-datepicker #releasedAtPicker>
+    </mat-datepicker>
+</mat-form-field>

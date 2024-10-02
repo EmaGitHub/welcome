@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+    <h3 mat-dialog-title class="fw-bold fs-1 me-5">{{'adminsManagement.addAdmin' | translate}}</h3>
+    <button mat-icon-button aria-label="{{'buttons.close' | translate}}" matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+    <p class="color-grey">{{'adminsManagement.addAdminDesc' | translate}}</p>
+    <form class="row my-2">
+        <div class="col-12 d-flex flex-column">
+            <app-search-profiles-autocomplete textLabel="generic.nameSurname" [profile]="selectedProfile" (selectProfile)="selectProfile($event)"></app-search-profiles-autocomplete>
+        </div>
+        <div class="col-12 d-flex flex-column">
+            <mat-label class="custom-label">{{'generic.country' | translate}}</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select [(value)]="countrySelected" placeholder="{{'generic.selectCountry' | translate}}" (selectionChange)="loadCities()">
+                    <mat-option *ngFor="let country of countryList" [value]="country.key">{{country.value}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix color="primary">expand_more</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="col-12 d-flex flex-column" *ngIf="adminType === adminsManagementType.SITE">
+            <mat-label class="custom-label">{{'generic.city' | translate}}</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select [(value)]="citySelected" placeholder="{{'generic.selectCity' | translate}}" (selectionChange)="loadSites()">
+                    <app-text-filter-select (filter)="filterCityList($event)"></app-text-filter-select>
+                    <mat-option *ngFor="let city of filteredCityList" [value]="city">{{city}}</mat-option>
+                </mat-select>
+                <mat-icon matSuffix color="primary">expand_more</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="col-12 d-flex flex-column" *ngIf="adminType === adminsManagementType.SITE">
+            <mat-label class="custom-label">{{'generic.site' | translate}}</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select #sitesSelect [(value)]="selectedSites" multiple [placeholder]="'generic.selectSite' | translate">
+                    <mat-option *ngFor="let site of siteList" [value]="site">{{site.siteAddress}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <mat-chip-list>
+            <mat-chip *ngFor="let site of selectedSites" class="custom-chip">
+                {{site.siteAddress}}
+                <button mat-icon-button (click)="removeSite(site)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end py-3">
+    <button mat-stroked-button color="primary" class="border-primary py-1" matDialogClose>{{'buttons.cancel' | translate}}</button>
+    <button mat-raised-button color="primary" class="py-1" *ngIf="adminType === adminsManagementType.SITE" [disabled]="(!selectedSites || selectedSites.length === 0) || !selectedProfile" (click)="addAdmin()">{{'buttons.confirm' | translate}}</button>
+    <button mat-raised-button color="primary" class="py-1" *ngIf="adminType === adminsManagementType.COUNTRY" [disabled]="!countrySelected || !selectedProfile" (click)="addAdmin()">{{'buttons.confirm' | translate}}</button>
+</mat-dialog-actions>

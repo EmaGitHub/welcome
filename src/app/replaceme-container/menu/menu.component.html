@@ -1,0 +1,22 @@
+<div>
+    <p>Invoke a resource (menu) of "replaceme" business service deployed on WSO2 APIM</p>
+</div>
+<div class="form-inline" style="margin-bottom: 10px;">
+    <enel-button (click)="menu()" type="primary" [buttonText]="'Menu'"></enel-button>
+    <enel-button (click)="clear()" style="margin-left: 10px" type="secondary" [buttonText]="'Clear'" ></enel-button>
+</div>
+
+<enel-table *ngIf="data.length!=0" [bordered]="false">
+    <tr slot="thead">
+        <th scope="col"><enel-th>#</enel-th></th>
+        <th scope="col"><enel-th>Name</enel-th></th>
+        <th scope="col"><enel-th>Description</enel-th></th>
+        <th scope="col"><enel-th>Price</enel-th></th>
+    </tr>
+    <tr slot="tbody" *ngFor="let elem of data, let i = index">
+        <td>{{ i }}</td>
+        <td>{{ elem.name }}</td>
+        <td>{{ elem.description }}</td>
+        <td>{{ elem.price }}</td>
+    </tr>
+</enel-table>

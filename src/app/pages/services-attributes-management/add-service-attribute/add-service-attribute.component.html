@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="d-flex justify-content-between py-4">
+        <form>
+            <div class="d-flex flex-column">
+                <mat-label class="custom-label">{{type.searchTitle | translate}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{type.searchPlaceholder | translate}}</mat-label>
+                    <input type="text" matInput [formControl]="firstNameControl">
+                    <mat-icon matSuffix color="primary">search</mat-icon>
+                </mat-form-field>
+            </div>
+        </form>
+
+        <div class="d-flex flex-column justify-content-center">
+            <button mat-flat-button color="primary" class="py-2" (click)="handleServiceAttribute()">
+                {{type.button | translate}}
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+

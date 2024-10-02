@@ -1,0 +1,33 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '../../../node_modules/@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+@import "constants";
+
+// Create the theme object (a Sass map containing all of the palettes).
+$solution-theme: mat-light-theme($solution-primary, $solution-accent, $solution-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($solution-theme);
+
+/* DEFINIZIONE TYPOGRAPHY SI PUO METTERE ANCHE DENTRO I @MEDIA PER GESTIRE LA PARTE MOBILE E TABLE SE NON E' POSSIBILE SCALARLA A PERCENTUALE*/
+$my-custom-typography: mat-typography-config(
+        $font-family: Roobert ENEL,
+        $headline:  mat-typography-level(3.625rem, 3.5rem),
+        $title:  mat-typography-level(3rem, 3rem),
+        $subheading-2:  mat-typography-level(2.25rem, 2.625rem),
+        $subheading-1:  mat-typography-level( 2rem, 2.063rem),
+        $body-1:  mat-typography-level( 1.125rem, 1.688rem),
+        $button:  mat-typography-level( 1.125rem, 1.688rem)
+);
+@include mat-core($my-custom-typography);
+

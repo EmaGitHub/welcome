@@ -1,0 +1,14 @@
+.header {
+  height: 60px;
+  background: black;
+  color: white;
+
+  &-logo {
+    max-width: 6.25rem
+  }
+
+  &-language {
+    font-size: 1.125rem;
+    width: 2.5rem;
+  }
+}

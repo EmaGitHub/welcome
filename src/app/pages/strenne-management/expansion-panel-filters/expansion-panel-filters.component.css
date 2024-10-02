@@ -1,0 +1,48 @@
+::ng-deep .mat-expansion-panel {
+    background: #f7f8fb !important;
+    box-shadow: none !important;
+    }
+::ng-deep .mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+     color: #0152e8 !important;
+     border-width: 3px 0 0 3px !important;
+     padding: 6px !important;
+     
+}
+::ng-deep mat-expansion-panel .mat-expansion-indicator::after {
+    transform: rotate(223deg)!important;
+  }
+
+::ng-deep .mat-expansion-panel-header{
+    background: #f7f8fb !important;
+
+        height: 100px !important;
+        padding-left: 13px !important;
+        padding-right: 15px !important;
+    }   
+::ng-deep .mat-panel-title{
+    vertical-align: middle !important;
+    display: flex;
+    }
+
+    .customButtonStyle{
+        border: 1px solid  #0152e8;
+        color: #0152e8;
+        width: 150px;
+
+    }
+    .customButtonStylePrimary{
+        width: 150px;
+
+    }
+    .customIcon{
+        margin-left: 15px;
+    }
+
+
+    .slideStyle {
+        display: flex; 
+        justify-content: start; 
+        align-items: center; 
+        height: 50%; 
+    }
+

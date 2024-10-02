@@ -1,0 +1,62 @@
+Filters
+<form class="row">
+    <div class="col-md-4 d-flex flex-column">
+        <mat-label class="custom-label">{{'generic.country' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-select [(value)]="countrySelected" placeholder="{{'generic.selectCountry' | translate}}" (selectionChange)="loadCities()">
+                <mat-option *ngFor="let country of countryList" [value]="country.key">{{country.value}}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix color="primary">expand_more</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4 d-flex flex-column" *ngIf="adminsTypeSelected === adminsManagementType.SITE">
+        <mat-label class="custom-label">{{'generic.city' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-select [(value)]="citySelected" placeholder="{{'generic.selectCity' | translate}}" (selectionChange)="loadSites()">
+                <app-text-filter-select (filter)="filterCityList($event)"></app-text-filter-select>
+                <mat-option *ngFor="let city of filteredCityList" [value]="city">{{city}}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix color="primary">expand_more</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4 d-flex flex-column" *ngIf="adminsTypeSelected === adminsManagementType.SITE">
+        <mat-label class="custom-label">{{'generic.site' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-select [(value)]="siteSelected" placeholder="{{'generic.selectSite' | translate}}">
+                <app-text-filter-select (filter)="filterSiteList($event)"></app-text-filter-select>
+                <mat-option *ngFor="let site of filteredSiteList" [value]="site.idSite">
+                    {{site.siteAddress}}
+                </mat-option>
+            </mat-select>
+            <mat-icon matSuffix color="primary">expand_more</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+        <mat-label class="custom-label">{{'generic.user' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput [(ngModel)]="name" name="name" placeholder="{{'generic.nameSurname' | translate}}">
+            <button matSuffix mat-icon-button color="primary">
+                <mat-icon class="w-auto">search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+        <mat-label class="custom-label">{{'generic.userId' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <input [(ngModel)]="userId" matInput name="userid" placeholder="{{'generic.userId' | translate}}">
+            <button matSuffix mat-icon-button color="primary">
+                <mat-icon class="w-auto">search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+</form>
+
+<!-- Buttons -->
+<div class="row">
+    <div class="col">
+        <div class="d-flex justify-content-end mt-4">
+            <button mat-button class="color-dark-grey text-decoration-underline py-2 me-2" (click)="clearFilter()">{{'buttons.clearFilters' | translate}}</button>
+            <button mat-stroked-button class="bg-white color-dark-grey py-2" (click)="filterList()">{{'buttons.search' | translate}}</button>
+        </div>
+    </div>
+</div>

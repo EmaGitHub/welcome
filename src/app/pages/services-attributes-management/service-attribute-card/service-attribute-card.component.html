@@ -1,0 +1,56 @@
+<div *ngIf="!isService; else serviceBlock">
+    <div class="service-attribute-card p-3 bg-white custom-card">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <mat-icon color="{{serviceAttribute.type === 'SERVICE' ? 'primary' : 'accent'}}"
+                class="ei-{{serviceAttribute.icon}}" *ngIf="!isCategory"></mat-icon>
+
+            <mat-label
+                class="fw-bold flex-grow-1 ps-3 service-attribute-card__value break">{{serviceAttribute.name.toLowerCase() |
+                titlecase}}</mat-label>
+
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editServiceAttribute()" ngbTooltip="{{'generic.edit' | translate}}"
+                    [attr.aria-label]="'generic.edit' | translate">
+                    <span>{{ 'generic.edit' | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="deleteServiceAttribute()" ngbTooltip="{{'generic.delete' | translate}}"
+                    [attr.aria-label]="'generic.delete' | translate">
+                    <span>{{'generic.delete' | translate}}</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</div>
+
+<ng-template #serviceBlock>
+    <div class="service-attribute-card p-3 bg-white custom-card">
+        <div class="d-flex flex-row justify-content-between align-items-center" style="padding-bottom: 20px;">
+            <div class="flex-grow-1">
+                <mat-label class="rounded-box">{{serviceAttribute.category.name}}</mat-label> 
+                </div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editServiceAttribute()" ngbTooltip="{{'generic.edit' | translate}}"
+                    [attr.aria-label]="'generic.edit' | translate">
+                    <span>{{ 'generic.edit' | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="deleteServiceAttribute()" ngbTooltip="{{'generic.delete' | translate}}"
+                    [attr.aria-label]="'generic.delete' | translate">
+                    <span>{{'generic.delete' | translate}}</span>
+                </button>
+            </mat-menu>
+        </div>
+
+        <mat-icon color="{{serviceAttribute.type === 'SERVICE' ? 'primary' : 'accent'}}"
+            class="ei-{{serviceAttribute.icon}}" *ngIf="!isCategory"></mat-icon>
+
+        <mat-label class="fw-bold flex-grow-1 ps-3 service-attribute-card__value break">{{serviceAttribute.name.toLowerCase() | titlecase}}</mat-label>
+    </div>
+</ng-template>

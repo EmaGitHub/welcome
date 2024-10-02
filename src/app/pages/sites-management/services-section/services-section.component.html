@@ -1,0 +1,24 @@
+<div *ngIf="selectedSite" class="container">
+    <div class="row">
+        <div class="col my-5">
+            <div class="d-flex justify-content-end">
+                <button mat-raised-button color="primary" class="py-2" (click)="goToAddServices()">
+                    {{'services.add' | translate}}
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+            <div class="my-4">
+                <app-site-services-list *ngIf="siteDetails?.serviceList?.length; else emptyList"
+                                        [services]="siteDetails.serviceList"
+                                        (changeServices)="setSiteDetails()"
+                                        (deleteService)="deleteService($event)"
+                                        (saveService)="saveService($event)"
+                                        (cancelServiceUpdates)="cancelServiceUpdates($event)"></app-site-services-list>
+                <ng-template #emptyList>
+                    <p class="color-grey">{{'generic.noServices' | translate}}</p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

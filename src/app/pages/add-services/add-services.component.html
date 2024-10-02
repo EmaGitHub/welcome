@@ -1,0 +1,74 @@
+<app-page-title title="services.add"></app-page-title>
+
+<div *ngIf="selectedSite; else noSiteSelected">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Stepper [desktop only] -->
+                <mat-stepper orientation="horizontal" labelPosition="bottom" linear #stepper class="d-none d-sm-block" (selectionChange)="selectionChange($event)">
+                    <mat-step *ngFor="let step of steps" aria-label="{{step.title}}">
+                        <ng-template matStepLabel>{{step.title | translate}}</ng-template>
+                    </mat-step>
+                </mat-stepper>
+
+                <!-- Progress circular [mobile only] -->
+                <div class="d-block d-sm-none">
+                    <div class="d-flex align-items-center">
+                        <circle-progress
+                                [percent]="(selectedStepIndex+1)*34"
+                                [radius]="40"
+                                [outerStrokeWidth]="6"
+                                [innerStrokeWidth]="1"
+                                [space]="2"
+                                [outerStrokeColor]="'#0152e8'"
+                                [innerStrokeColor]="'#0152e8'"
+                                [title]="(selectedStepIndex+1)+'/3'"
+                                [titleFontWeight]="'bold'"
+                                [showSubtitle]="false"
+                                [showUnits]="false"
+                                [outerStrokeLinecap]="'square'"
+                        ></circle-progress>
+                        <p class="fw-bold fs-2">{{steps[selectedStepIndex].title | translate}}</p>
+                    </div>
+                </div>
+
+                <p class="color-grey mt-3">{{'services.addDescription' | translate}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Info -->
+    <div class="bg-light-grey mt-4">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col col-md-6">
+                    <div class="d-flex align-items-center">
+                        <mat-icon color="primary" class="ei-pin me-2"></mat-icon>
+                        <div class="fw-bold">{{'generic.site' | translate}}</div>
+                    </div>
+                    {{site?.address}}
+                </div>
+                <div class="col col-md-6">
+                    <div class="d-flex align-items-center">
+                        <mat-icon color="primary" class="me-2">person_outline</mat-icon>
+                        <div class="fw-bold">Building Manager</div>
+                    </div>
+                    {{buildingManager?.first_name}} {{buildingManager?.last_name}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Steps -->
+    <div [ngSwitch]="selectedStepIndex">
+        <app-services-selection *ngSwitchCase="0" [stepper]="stepper"></app-services-selection>
+        <app-services-details *ngSwitchCase="1" [stepper]="stepper"></app-services-details>
+        <app-services-summary *ngSwitchCase="2" [stepper]="stepper"></app-services-summary>
+    </div>
+</div>
+<ng-template #noSiteSelected>
+    <div class="mt-4 text-center color-grey">
+        <mat-icon class="ei-info-o display-1 w-auto h-auto mb-3"></mat-icon>
+        <p>{{'generic.noSiteSelected' | translate}}</p>
+    </div>
+</ng-template>

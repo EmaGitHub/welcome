@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+    <h3 mat-dialog-title class="fw-bold fs-1 me-5">Building Manager</h3>
+    <button mat-icon-button aria-label="{{'buttons.close' | translate}}" matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+    <p class="color-grey">{{'generic.selectBuildingManager' | translate}}</p>
+
+    <div class="d-flex align-items-center mt-2">
+        <span class="fw-bold me-2">{{'generic.site' | translate}}:</span>
+        <span>{{siteAddress}}</span>
+    </div>
+
+    <div class="d-flex justify-content-end mt-2">{{'generic.requiredFields' | translate}}</div>
+
+    <form class="mt-2">
+        <app-search-profiles-autocomplete textLabel="generic.buildingManagerReq" [profile]="buildingManager" (selectProfile)="selectBuildingManager($event)"></app-search-profiles-autocomplete>
+    </form>
+
+    <div class="custom-label mt-2">
+        <p>{{'generic.phoneNumber' | translate}}</p>
+        <p class="w-100 bg-light-grey p-2">{{buildingManager?.mobile_1 || '-'}}</p>
+    </div>
+
+    <div class="custom-label mt-2">
+        <p>{{'generic.email' | translate}}</p>
+        <p class="w-100 bg-light-grey p-2">{{buildingManager?.email || '-'}}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end py-3">
+    <button mat-stroked-button color="primary" class="border-primary py-1" matDialogClose>{{'buttons.cancel' | translate}}</button>
+    <button mat-raised-button color="primary" class="py-1" [disabled]="!buildingManager" (click)="confirm()">{{'buttons.confirm' | translate}}</button>
+</mat-dialog-actions>

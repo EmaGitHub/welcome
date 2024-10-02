@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+    <h3 mat-dialog-title class="fw-bold fs-1 me-5">{{'attributes.add' | translate}}</h3>
+    <button mat-icon-button aria-label="{{'buttons.close' | translate}}" matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content class="pb-4">
+    <p class="color-grey">{{'attributes.selectAttrToAdd' | translate}}</p>
+    <div class="d-flex flex-column mt-4">
+        <mat-label class="custom-label">{{'attributes.label' | translate}}</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-select #select [(value)]="selectedAttributes" multiple [placeholder]="'attributes.select' | translate">
+                <mat-option *ngFor="let attribute of dialogData.availableAttributes" [value]="attribute">{{attribute.name | titlecase}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-chip-list>
+        <mat-chip *ngFor="let attr of selectedAttributes" class="custom-chip">
+            {{attr.name | titlecase}}
+            <button mat-icon-button (click)="removeAttr(attr)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-chip>
+    </mat-chip-list>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end py-3">
+    <button mat-stroked-button color="primary" class="border-primary py-1" matDialogClose>{{'buttons.cancel' | translate}}</button>
+    <button mat-raised-button [disabled]="!selectedAttributes.length" (click)="onConfirm()" color="primary" class="py-1">{{'buttons.confirm' | translate}}</button>
+</mat-dialog-actions>

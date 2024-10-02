@@ -1,0 +1,463 @@
+/* You can add global styles to this file, and also import other styles files */
+/*
+@import "e-sdk/bootstrap/css/bootstrap.css";
+
+@import "e-sdk/bootstrap-dropdown-hover/css/bootstrap-dropdownhover.min.css";
+@import "e-sdk/bootstrap-select/css/bootstrap-select.min.css";
+@import "e-sdk/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css";
+
+*/
+/* Importing Bootstrap SCSS file. */
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '~bootstrap/scss/bootstrap';
+@import './custom-theme.scss';
+@import './font.scss';
+@import './icons.css';
+
+html { font-size: 100%; }
+
+body {
+    color: black;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    @extend .m-0;
+}
+
+
+/* Color ----------- */
+.color-primary {
+    color: mat-color($solution-primary) !important;
+}
+
+.color-primary-dark {
+    color: mat-color($solution-primary, 700) !important;
+}
+
+.color-accent, .color-secondary {
+    color: mat-color($solution-accent) !important;
+}
+
+.color-warn {
+    color: mat-color($solution-warn) !important;
+}
+
+.color-grey {
+    color: $solution-grey !important;
+}
+
+.color-dark-grey {
+    color: $solution-dark-grey !important;
+}
+
+.color-green {
+    color: $solution-green !important;
+}
+
+.color-orange {
+    color: $solution-orange !important;
+}
+/* End Color ----------- */
+
+
+/* Background ----------- */
+.bg-primary {
+    background: mat-color($solution-primary) !important;
+}
+
+.bg-accent, .bg-secondary {
+    background: mat-color($solution-accent) !important;
+}
+
+.bg-warn {
+    background: mat-color($solution-warn) !important;
+}
+
+.bg-light-grey {
+    background: $solution-light-grey !important;
+}
+/* End Background ----------- */
+
+
+.mat-dialog-container {
+    border-radius: 1rem !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    @extend .bg-white;
+}
+
+.mat-select-arrow {
+    @extend .border-0;
+}
+
+.mat-step-label-selected, .mat-step-label-active {
+    font-size: inherit;
+    @extend .color-primary;
+}
+
+.custom-label {
+    @extend .fs-6, .fw-bold, .color-dark-grey, .text-uppercase;
+}
+
+.custom-chip {
+    @extend .bg-light-grey, .color-primary, .fw-bold;
+
+    button {
+        @extend .color-grey;
+    }
+}
+
+.custom-accordion {
+    .card {
+        @extend .border-0;
+        background-color: transparent;
+    }
+    .card-header {
+        @extend .px-0;
+        background-color: transparent;
+    }
+}
+
+.mat-tab-label-active {
+    color: mat-color($solution-primary);
+    opacity: 1 !important;
+}
+
+.header-language .mat-select-value-text, .header-language .mat-select-arrow{
+    color: white;
+}
+
+.transition {
+    transition: .5s;
+}
+
+.rotateX180 {
+    transform: rotateX(180deg);
+}
+
+.avatar {
+    @extend .rounded-circle;
+    background-size: cover;
+    width: 3rem;
+    height: 3rem;
+}
+
+.text-hero {
+    font-size: 3.625rem;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+
+/* Tooltip ----------- */
+.tooltip {
+    .arrow::before {
+        border-color: white;
+    }
+    .tooltip-inner {
+        @extend .bg-white, .shadow, .color-primary;
+    }
+}
+
+
+/* Custom card ----------- */
+.custom-card {
+    @include mat-elevation(5, black, .3);
+    border-radius: 0.75rem !important;
+    transition: .5s;
+
+    &.selected {
+        @extend .border, .border-2, .border-primary;
+    }
+}
+
+
+/* Custom paginator ----------- */
+.custom-paginator {
+    .page-link{
+        @extend .d-flex, .justify-content-center, .align-items-center, .rounded-3, .border-0;
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.625rem !important;
+        color: #667790;
+    }
+
+    .page-item {
+        &:last-child .page-link, &:first-child .page-link {
+            @extend .p-0;
+        }
+
+        &.active .page-link {
+            @extend .bg-primary;
+        }
+    }
+
+    mat-icon {
+        @extend .d-flex, .justify-content-center, .align-items-center, .h-100, .w-100, .bg-white, .border, .border-1, .border-primary, .rounded-3;
+    }
+}
+
+
+/* Custom table ----------- */
+.table {
+    > .mat-header-row {
+        @extend .p-3, .border-0;
+
+        .mat-header-cell {
+            @extend .custom-label;
+        }
+    }
+
+    > .mat-row {
+        @extend .p-3, .border-0;
+
+        &:nth-child(odd){
+            @extend .bg-white;
+        }
+
+        &:nth-child(even){
+            @extend .bg-light-grey;
+        }
+
+        &.highlighted-row {
+            @extend .bg-primary;
+
+            > .mat-cell {
+                @extend .text-white;
+            }
+        }
+    }
+}
+
+/* Popover ----------- */
+.popover {
+    @extend .py-2, .border-0, .shadow;
+    &-header { @extend .m-0, .bg-white, .fs-5, .py-0, .lh-1, .color-primary, .border-0; }
+    &-body { @extend .fs-6, .py-0, .color-grey; }
+}
+
+
+/* Owl Carousel ----------- */
+.owl {
+    &-prev, &-next {
+        @extend .position-absolute, .d-flex, .align-items-center;
+        top: 0;
+        bottom: 0;
+        background: transparent !important;
+
+        &.disabled {
+            @extend .d-none;
+        }
+    }
+
+    &-prev {
+        left: -3rem;
+    }
+
+    &-next {
+        right: -3rem;
+    }
+}
+
+
+/* Ngb Carousel ----------- */
+.carousel-icon {
+    @extend .bg-white, .border, .border-1, .border-primary, .h-auto, .p-3, .rounded-3, .color-primary, .w-auto;
+    background-image: none;
+}
+.carousel {
+    // ngb-carousel
+    &-indicators {
+        @extend .m-auto;
+
+        > li {
+            @extend .rounded-circle, .border, .border-1, .border-primary, .m-2;
+            width: 1rem;
+            height: 1rem;
+
+            &.active {
+                @extend .bg-primary;
+            }
+        }
+    }
+
+    .carousel-inner .sr-only {
+        @extend .d-none;
+    }
+
+    &:not(.hide-arrows) {
+        .carousel-control {
+            &-prev, &-next {
+                opacity: .2;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                &-icon {
+                    @extend .carousel-icon;
+                    font-family: 'enel-icon';
+                }
+
+                > .sr-only {
+                    @extend .fade;
+                }
+            }
+
+            &-prev-icon:before {
+                content: '\e925';
+            }
+
+            &-next-icon:before {
+                content: '\e926';
+            }
+        }
+    }
+
+    // mat-carousel
+    > button {
+        @extend .bg-white, .border, .border-1, .border-primary;
+        border-radius: 4px;
+        height: 4.625rem;
+        width: 4.625rem;
+    }
+
+    > button:first-of-type {
+        left: 0px !important;
+    }
+
+    > button:last-of-type {
+        right: 0px !important;
+    }
+}
+
+
+/* Custom scrollbar ----------- */
+.custom-scrollbar {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-color: #ccc;
+        border-style: solid;
+        border-width: 0 4px;
+        border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        background-color: #ccc;
+        border-color: white;
+        border-width: 3px;
+        border-style: solid;
+    }
+}
+
+
+/* Font ----------- */
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    html { font-size: 80%;}
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 321px) {
+    html { font-size: 80%;}
+}
+
+/* Smartphones (portrait) ----------- */
+/* viewport size <= 320px ----------- */
+@media only screen
+and (max-width : 320px) {
+    html { font-size: 80%;}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+    html { font-size: 90%;}
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+    html { font-size: 90%;}
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1024px) {
+    html { font-size: 100%;}
+}
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+    html { font-size: 100%;}
+}
+
+/* Large screens ----------- */
+@media only screen
+and (min-width : 1824px) {
+    html { font-size: 100%;}
+}
+
+mat-table {
+    @extend .w-100;
+    >.mat-row, >.mat-header-row {
+      @extend .border-0;
+      &:nth-child(odd) {
+        @extend .bg-white;
+      }
+      &:nth-child(even) {
+        @extend .bg-light-grey;
+      }
+      mat-cell {
+        min-height: 4rem;
+      }
+    }
+  }
+
+  ::ng-deep .mat-select-value-paginator {
+    color: #407DEE;
+    font-size: 20px;
+  }
+  ::ng-deep .mat-option-text-paginator {
+    color: #407DEE;
+    font-size: 20px;
+  }
+  
+.mat-icon.primary {
+    color:  #407DEE; 
+  }
+  
+  .mat-icon.secondary {
+    color:  #6b6b6b; 
+  }

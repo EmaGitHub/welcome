@@ -1,0 +1,18 @@
+<app-user (updateUser)="updateUserId($event)"></app-user>
+
+<hr>
+
+<enel-accordion type="simple" tint="light" numbered="1">
+    <enel-accordion-item title="Business Service Menu Example">
+        <app-pizza-shack [data]="menu" [testApiStatus]="this.testApiStatus" (loadMenu)="loadMenu()"></app-pizza-shack>
+    </enel-accordion-item>
+    <enel-accordion-item title="Business Service Order Example">
+        <app-add-order (addOrder)="addOrder($event)"></app-add-order>
+        <div style="margin-top: 10px">
+            <app-list-message [data]="data" (deleteTask)="deleteOrder($event)"></app-list-message>
+        </div>
+    </enel-accordion-item>
+    <enel-accordion-item title="Business Service Menu Example - For Internal User and External User with the activity for menu">
+        <app-pizza-shack [data]="menuInt" [testApiStatus]="this.testApiStatus" (loadMenu)="loadMenuInternal()"></app-pizza-shack>
+    </enel-accordion-item>
+</enel-accordion>

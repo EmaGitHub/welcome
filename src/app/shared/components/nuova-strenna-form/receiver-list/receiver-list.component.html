@@ -1,0 +1,133 @@
+<div class="container mb-4">
+
+  <mat-table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+    class="table w-100">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: 1.0; overflow-wrap: break-all;">
+        <p class="custom-label">{{ 'strennaForm.recipient' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: 1.0; overflow-wrap: break-all;">
+        <div class="myColumn"><span class="d-flex flex-row gap-3 no-border"><span>{{element.name}}</span></span></div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="checkbox">
+      <mat-header-cell class="fs-6 fw-bold myColumn" *matHeaderCellDef style="flex: .2">
+        <mat-checkbox (change)="$event ? masterToggle() : null;isAnySelected()"
+          [checked]="selection.hasValue() && isAllSelected()" color="primary"
+          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </mat-header-cell>
+
+      <mat-cell class="myColumn" *matCellDef="let element" style="flex: .2">
+        <mat-checkbox class="myColumn " color="primary" (change)="selection.toggle(element) ;isAnySelected()"
+          [checked]="selection.isSelected(element) && (!element.is_director_or_board && element.status !== 'delivered' && element.status !== 'cancelled')"
+          [aria-label]="checkboxLabel(element)"
+          [disabled]="element.is_director_or_board || checkElementDisabled(element)">
+        </mat-checkbox>
+      </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="id_strenna" class="container-id-strenna">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: .8; overflow-wrap: break-all; ">
+        <p class="custom-label">{{ 'strennaForm.idStrenna' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: .8; overflow-wrap: break-all;">{{ element.id_strenna
+        }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sender" class="container-sender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: .9; overflow-wrap: break-all;">
+        <p class="custom-label">{{ 'strennaForm.sender' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: .9; overflow-wrap: break-all;">{{ element.sender }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="is_director_or_board" class="container-director ">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: .6; overflow-wrap: break-all;">
+        <p class="custom-label">{{ 'strennaForm.isDirector' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: .6; overflow-wrap: break-all;">
+
+        {{ ((element.is_director_or_board == null || element.is_director_or_board == false)? 'strennaForm.no' :
+        'strennaForm.yes') | translate}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date" class="container-date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: 0.9; overflow-wrap: break-all;">
+        <p class="custom-label">{{ 'strennaForm.dateOfReceipt' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: 0.9; overflow-wrap: break-all;">{{
+        formatData(element.date)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status" class="container-status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header style="flex: 0.8; overflow-wrap: break-all;">
+        <p class="custom-label">{{ 'strennaForm.status' | translate}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: 0.8; overflow-wrap: break-all;" [ngStyle]="{'color': 
+      element.status === 'delivered' ? 'green' : 
+      element.status === 'toBeWithdrawn' ? 'blue' : 
+      element.status === 'toBeManaged' ? 'orange' : 
+      element.status === 'refused' ? 'grey' : 
+      element.status === 'donated' ? 'brown' : 
+      element.status === 'cancelled' ? 'red' : 
+      'black'}">
+        <span [ngStyle]="{'color': 
+      element.status === 'delivered' ? 'green' : 
+      element.status === 'toBeWithdrawn' ? 'blue' : 
+      element.status === 'toBeManaged' ? 'orange' : 
+      element.status === 'refused' ? 'grey' : 
+      element.status === 'donated' ? 'brown' : 
+      element.status === 'cancelled' ? 'red' : 
+      'black'}" style="font-size: 12px; vertical-align :middle ; background-color: transparent;">●</span>
+        {{'strennaForm.'+element.status | translate}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="icons" class="container-icons">
+      <mat-header-cell *matHeaderCellDef style="flex: .8"></mat-header-cell>
+      <mat-cell *matCellDef="let element" style="flex: .8">
+        <div class="myColumn">
+          <button mat-icon-button ngbTooltip="{{'generic.view' | translate}}"
+            [attr.aria-label]="'generic.view' | translate" (click)="navigateToShowDetails(element.id_strenna)">
+            <mat-icon color="primary" class="strenne-details me-2"></mat-icon>
+
+          </button>
+        </div>
+        <div class="myColumn">
+          <button mat-icon-button ngbTooltip="{{'generic.edit' | translate}}"
+            [attr.aria-label]="'generic.edit' | translate" (click)="navigateToEdit(element.id_strenna)"
+            [disabled]="checkElementDisabled(element)">
+            <mat-icon [ngStyle]="{'color': checkElementDisabled(element) ? 'grey' : '#0152e8'}" class="ei-edit">
+            </mat-icon>
+          </button>
+        </div>
+
+        <div class="myColumn">
+          <button mat-icon-button ngbTooltip="{{'generic.delete' | translate}}"
+            [attr.aria-label]="'generic.delete' | translate" (click)="onClickDeleteStrenna(element.id_strenna)"
+            [disabled]="checkElementDisabled(element)" *ngIf="isStrennaAdmin">
+            <mat-icon [ngStyle]="{'color': checkElementDisabled(element) ? 'grey' : '#0152e8'}" class="ei-bin">
+            </mat-icon>
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row class="no-border" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="no-border" *matRowDef="let element; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <div *ngIf="dataSource.data.length == 0" class="w-full text-center pt-2">{{ 'strennaForm.noDataAvelaible' |
+    translate}}</div>
+  <div class="d-flex justify-content-end mt-4">
+    <a href="javascript:void(0)" class="d-flex text-decoration-none" (click)="downloadExcel()" *ngIf="isStrennaAdmin || isStrennaOperator">
+      {{'strenneManagement.exportxls' | translate}}
+      <mat-icon class="ms-2">file_download</mat-icon>
+    </a>
+  </div>
+
+  <mat-paginator class="custom-paginator mat-paginator-page-size" #paginator [length]="100" [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"  aria-label="Select page">
+  </mat-paginator>
+
+</div>

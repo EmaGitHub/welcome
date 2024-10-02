@@ -1,0 +1,52 @@
+.rounded-custom {
+    border-radius: 20px;
+    /* Aumenta il raggio degli angoli per rendere la card più arrotondata */
+    padding: 20px;
+    /* Aggiunge un padding interno per separare il contenuto dalla bordatura */
+  }
+  
+  .vertical-align-list li {
+    display: flex;
+    align-items: center;
+  }
+  
+  .right-content {
+    width: 70%;
+  }
+  
+  .word {
+    font-size: calc(.5vw + 1vh);
+  }
+  
+  p.bold {
+    font-weight: bold;
+  
+  }
+  
+  .section {
+    padding-top: 35px;
+  }
+  
+  .customButtonStyle{
+    border: 1px solid  #0152e8;
+    color: #0152e8;
+    width: 150px;
+
+}
+.customButtonStylePrimary{
+    width: 150px;
+
+}
+  .customButtonStyle-mobile{
+    border: 1px solid  #0152e8;
+    color: #0152e8;
+    width: 75px;
+
+}
+.customButtonStylePrimary-mobile{
+    width: 75px;
+
+}
+.container{
+  max-height: 200vh; 
+}

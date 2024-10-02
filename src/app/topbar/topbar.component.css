@@ -1,0 +1,9 @@
+.dropdown-menu-text {
+    padding: 8px 0;
+    color: white;
+    display: inline-block;
+}
+
+.dropdown-menu-text:first-of-type {
+    padding-left: 8px;
+}

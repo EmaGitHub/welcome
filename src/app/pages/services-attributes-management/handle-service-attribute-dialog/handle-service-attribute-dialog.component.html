@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+    <h3 mat-dialog-title class="fw-bold fs-1 me-5">{{getTitle() | translate}}</h3>
+    <button mat-icon-button aria-label="{{'buttons.close' | translate}}"
+        matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+    <p class="color-grey">
+        {{type === 'SERVICE' ? ('saManagement.newServiceDesc' | translate) :
+        type === 'ATTRIBUTE' ? ('saManagement.newAttributeDesc' | translate) :
+        type === 'CATEGORY' ? ('saManagement.newCategoryDesc' | translate) : 'Fallback Text'}}
+    </p>
+    <form class="row my-3">
+        <div class="col-12 d-flex flex-column">
+            <mat-label class="custom-label">
+                {{type === 'SERVICE' ? ('saManagement.serviceName' | translate) :
+                type === 'ATTRIBUTE' ? ('saManagement.attributeName' | translate) :
+                type === 'CATEGORY' ? ('saManagement.categoryName' | translate) : 'Fallback Text'}}</mat-label>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'generic.typeHere' | translate}}</mat-label>
+                <input type="text" [(ngModel)]="serviceName" matInput name="serviceAttributeName">
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="(type ==='SERVICE')" class="col-12 d-flex flex-column">
+            <mat-label class="custom-label">{{'saManagement.category' | translate}} * </mat-label>
+            <mat-form-field appearance="outline">
+                <mat-select  [(ngModel)]="selectedCategoryOption" 
+                name="selectedCategoryOption" 
+                placeholder="{{'category.label' | translate}}" 
+                id="categoryType">
+                    <mat-option>-</mat-option>
+                    <mat-option *ngFor="let option of categoryOptions" [value]="option"> {{option.name | translate }} </mat-option>
+                </mat-select>
+                <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="(type ==='SERVICE') || type ==='ATTRIBUTE'" class="col-12 d-flex flex-column">
+            <mat-label class="custom-label">{{'generic.icon' | translate}}</mat-label>
+            <div class="d-flex flex-row gap-4">
+                <mat-expansion-panel [(expanded)]="toggleIcon" class="flex-grow-1">
+                    <mat-expansion-panel-header>
+                        <p style="font-size: 1.125rem; color: rgba(0, 0, 0, 0.6)">{{'generic.selectIcon' | translate}}</p>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <div style="max-height: 300px; overflow: auto">
+                            <button mat-icon-button *ngFor="let icon of icons"
+                                (click)="selectIcon(icon?.properties?.name)">
+                                <mat-icon color="{{type === 'SERVICE' ? 'primary' : 'accent'}}"
+                                    class="ei-{{icon.properties.name}}"></mat-icon>
+                            </button>
+                        </div>
+                    </ng-template>
+                </mat-expansion-panel>
+                <div class="d-flex flex-row border-1 border align-items-center px-4" style="max-height: 50px">
+                    <mat-icon color="{{type === 'SERVICE' ? 'primary' : 'accent'}}"
+                        class="ei-{{selectedIcon}}"></mat-icon>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="(type ==='ATTRIBUTE')" class="col-12 d-flex flex-column">
+        <div class="d-flex flex-row gap-4">
+            <mat-label class="custom-label">{{'saManagement.selectIfAttachment' | translate}}</mat-label>
+            <mat-checkbox [checked]="isAttachment" [(ngModel)]="isAttachment" matInput name="attributeIsAttachment">
+            </mat-checkbox>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end py-3">
+    <button mat-stroked-button color="primary" class="border-primary py-1" matDialogClose>{{'buttons.cancel' |translate}}</button>
+
+
+    <button *ngIf="(type ==='CATEGORY')" mat-raised-button color="primary" class="py-1" [disabled]="!serviceName"(click)="saveServiceAttribute()" [visible]="type ==='CATEGORY'">{{'buttons.confirm' | translate}}</button>
+    <button *ngIf="(type ==='SERVICE') " mat-raised-button color="primary" class="py-1"[disabled]="!serviceName || !selectedIcon || !selectedCategoryOption" (click)="saveServiceAttribute()">{{'buttons.confirm' |translate}}</button>
+    <button *ngIf="(type ==='ATTRIBUTE')" mat-raised-button color="primary" class="py-1"[disabled]="!serviceName || !selectedIcon" (click)="saveServiceAttribute()">{{'buttons.confirm' |translate}}</button>
+</mat-dialog-actions>

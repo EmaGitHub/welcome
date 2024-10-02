@@ -1,0 +1,16 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col">
+            <app-site-services-list [services]="newSiteServices"
+                                    (changeServices)="setNewSiteServices($event)"
+                                    (deleteService)="deleteService($event)"
+                                    [servicesInsertion]="true"></app-site-services-list>
+
+            <div class="d-flex justify-content-end py-4">
+                <button mat-stroked-button color="primary" class="border-primary py-2 me-2" (click)="stepper.previous()">{{'buttons.back' | translate}}</button>
+                <button mat-raised-button color="primary" class="py-2" [disabled]="!newSiteServices?.length" (click)="onContinue()">{{'buttons.continue' | translate}}</button>
+            </div>
+
+        </div>
+    </div>
+</div>

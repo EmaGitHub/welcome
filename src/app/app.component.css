@@ -1,0 +1,45 @@
+.navbar-collapse > div {
+    color: white;
+}
+
+.dropdown-menu-text {
+    padding: 8px 0;
+    color: white;
+    display: inline-block;
+}
+
+.dropdown-menu-text:first-of-type {
+    padding-left: 8px;
+}
+
+.user-data {
+    margin-top: 10px;
+}
+
+
+.toast-custom {
+    position: relative;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: all 0.5s;
+    margin-bottom: 10px;
+}
+
+
+.toast-container {
+    position: fixed;
+    width: fit-content;
+    z-index: 9999;
+    height: fit-content;
+    font-family: inherit;
+    background: transparent;
+}
+
+.toast-container-top-center {
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}

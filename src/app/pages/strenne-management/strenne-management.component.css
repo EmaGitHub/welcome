@@ -1,0 +1,29 @@
+::ng-deep .mat-expansion-panel {
+    background: #f7f8fb !important;
+    box-shadow: none !important;
+    }
+::ng-deep .mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+     color: #0152e8 !important;
+     border-width: 3px 0 0 3px !important;
+     padding: 6px !important;
+
+    }
+::ng-deep .mat-expansion-panel-header{
+        height: 100px !important;
+    }   
+::ng-deep .mat-panel-title{
+    vertical-align: middle;
+    display: flex;
+}
+
+
+.myColor {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(	1	,82	,232);
+}
+.myColorSolicit {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(105, 105, 105);
+}

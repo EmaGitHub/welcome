@@ -1,0 +1,23 @@
+<div class="d-flex flex-column">
+    <mat-label class="custom-label">{{textLabel | translate}}</mat-label>
+    <mat-form-field appearance="outline">
+        <input matInput [matAutocomplete]="autocomplete" [formControl]="formControl" placeholder="{{'generic.nameSurname' | translate}}">
+        <button matSuffix mat-icon-button color="primary">
+            <mat-spinner *ngIf="customLoading; else searchIcon" value="indeterminate" color="primary" diameter="30"></mat-spinner>
+            <ng-template #searchIcon>
+                <mat-icon class="w-auto">search</mat-icon>
+            </ng-template>
+        </button>
+        <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelectionChange($event)">
+            <mat-option *ngFor="let profile of profiles"
+                        [value]="profile">
+                <div class="d-flex align-items-center">
+                    <div class="fs-6 ms-2 flex-grow-1">
+                        <div class="lh-1 fw-bold">{{profile.first_name}} {{profile.last_name}}</div>
+                        <div class="lh-1">{{profile.wc_city}}<span *ngIf="profile.wc_city">, </span>{{profile.country_desc}}<span *ngIf="profile.country_desc">, </span>{{profile.company_desc}}</div>
+                    </div>
+                </div>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>

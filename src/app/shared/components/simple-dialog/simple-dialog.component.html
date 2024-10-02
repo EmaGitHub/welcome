@@ -1,0 +1,30 @@
+<div class="p-4">
+    <!-- DIALOG HEADER -->
+    <div mat-dialog-title
+        class="d-flex align-items-center {{title ? 'justify-content-between' : 'justify-content-end'}}">
+        <div mat-dialog-title class="fw-bold {{helpSupport ? 'fs-3' : 'fs-2'}} fs-2 mb-0 me-5" [class.d-none]="!title">
+            {{(title || 'Dialog') | translate}}</div>
+        <button mat-icon-button aria-label="{{'close' | translate}}" matDialogClose><mat-icon>close</mat-icon></button>
+    </div>
+    <hr *ngIf="helpSupport" style="color:#C8C8C8" />
+
+    <!-- DIALOG BODY - OPTIONAL TRANSCLUDE -->
+
+    <mat-dialog-content class="text-center p-4">
+        <mat-icon color="primary" class="display-3 h-auto w-auto">{{icon}}</mat-icon>
+        <p dialog-text id="dialog-text">{{contentText | translate}}</p>
+    </mat-dialog-content>
+
+
+    <!-- DIALOG FOOTER - OPTIONAL TRANSCLUDE -->
+
+    <div mat-dialog-actions class="d-flex flex-column flex-sm-row justify-content-end mt-5 align-items-stretch gap-4"
+        *ngIf="(btnLeft || btnRight); else transclude_footer">
+        <button *ngIf="btnLeft" mat-stroked-button mat-dialog-close
+            (click)="onBtnLeft ? onBtnLeft() : onClose()">{{btnLeft || 'Close'}}</button>
+        <button *ngIf="btnRight" mat-flat-button color="primary" (click)="onBtnRight()">{{btnRight || 'Ok'}}</button>
+    </div>
+    <ng-template #transclude_footer>
+        <ng-content select="app-dialog-footer"></ng-content>
+    </ng-template>
+</div>

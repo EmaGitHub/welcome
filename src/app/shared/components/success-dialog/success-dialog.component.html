@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-end">
+    <div mat-dialog-title class="d-none">{{'success.label' | translate}}</div>
+    <button mat-icon-button aria-label="{{'buttons.close' | translate}}" matDialogClose><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content class="text-center p-4">
+    <mat-icon class="text-success display-3 h-auto w-auto">{{icon}}</mat-icon>
+    <p>{{text | translate}}</p>
+</mat-dialog-content>

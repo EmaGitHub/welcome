@@ -1,0 +1,14 @@
+<form class="form-inline">
+    <div class="form-group">
+        Order description*
+        <enel-input (onTextChangeEvent)="changeInput($event)">
+        </enel-input>
+    </div>
+
+    <div class="form-group" >
+        <enel-button (click)="onSubmit()" type="primary" [buttonText]="'Add'"></enel-button>
+        <enel-button type="secondary"  [buttonText]="'Clear'" (click)="clear()"></enel-button>
+    </div>
+</form>
+
+

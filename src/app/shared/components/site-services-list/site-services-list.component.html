@@ -1,0 +1,103 @@
+<ngb-accordion *ngIf="services.length" [closeOthers]="true" #accordion class="custom-accordion" [activeIds]="'service-'+services[0].id_service">
+    <ngb-panel *ngFor="let service of services" [id]="'service-'+service.id_service">
+
+        <!-- PANEL HEADER -->
+        <ng-template ngbPanelHeader let-opened="opened">
+            <div class="d-flex align-items-center justify-content-between">
+                <mat-icon color="primary" class="ei-{{service.icon}} me-2"></mat-icon>
+                <h4 class="flex-grow-1 fw-bold fs-5">{{service.name | titlecase}}</h4>
+                <button *ngIf="!editingServices.get(service.id_service) && !servicesInsertion"
+                        (click)="editingServices.set(service.id_service, true); accordion.expand('service-'+service.id_service)"
+                        ngbTooltip="{{'sitesManagement.editService' | translate}}"
+                        [attr.aria-label]="'sitesManagement.editService' | translate"
+                        mat-icon-button color="primary">
+                    <mat-icon class="ei-edit w-auto h-auto"></mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="onServiceDelete(service.id_service)"
+                        ngbTooltip="{{'sitesManagement.deleteService' | translate}}"
+                        [attr.aria-label]="'sitesManagement.deleteService' | translate">
+                    <mat-icon class="ei-bin w-auto h-auto"></mat-icon>
+                </button>
+                <button ngbPanelToggle mat-icon-button color="primary"
+                        ngbTooltip="{{(opened ? 'generic.close' : 'generic.open') | translate}}"
+                        [attr.aria-label]="(opened ? 'generic.close' : 'generic.open') | translate">
+                    <mat-icon class="w-auto h-auto transition" [class.rotateX180]="opened">expand_more</mat-icon>
+                </button>
+            </div>
+        </ng-template>
+
+        <!-- PANEL CONTENT -->
+        <ng-template ngbPanelContent>
+            <form class="container">
+                <ng-template [ngIf]="service?.attributeServiceList?.length">
+                    <div class="row">
+                        <div class="col-2 custom-label">{{'attributes.attribute' | translate}}</div>
+                        <div class="col-10 custom-label">{{'generic.value' | translate}}</div>
+                    </div>
+                    <div class="row align-items-center mb-3" *ngFor="let attribute of service.attributeServiceList">
+                        <div class="col-2">{{attribute.name | titlecase}}</div>
+                        <div class="col-10">
+                            <div *ngIf="editingServices.get(service.id_service) || servicesInsertion; else readOnly" class="d-flex align-items-baseline">
+                                <div *ngIf = "attribute.is_attachment; else notAttachment"> 
+                                    <div #uploadFileSection *ngIf="!attribute.attachment; else fileSection">
+                                        <button  mat-stroked-button color="primary" class="border border-primary" (click)="fileUpload.click()">
+                                            {{'generic.uploadFile' | translate}}
+                                            <mat-icon class="ms-2 w-auto h-auto">add</mat-icon>
+                                        </button>
+                                    </div>
+                                    <ng-template #fileSection>
+                                        <div class="border border-1 d-flex justify-content-between align-items-center rounded ps-3">
+                                            <span class="text-ellipsis">{{attribute.value}}</span>
+                                            <button mat-icon-button (click)="cleanFileFilters(attribute)" ngbTooltip="{{'generic.deleteFile' | translate}}">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                    <input #fileUpload (change)="selectFile($event, attribute)" type="file" name="{{service.id_service}}-{{attribute.id_att_service}}" class="d-none">
+                                </div>
+                                <ng-template #notAttachment>
+                                    <mat-form-field appearance="outline" class="flex-grow-1">
+                                        <input matInput [(ngModel)]="attribute.value" (ngModelChange)="onChangeServices()"
+                                            name="{{service.id_service}}-{{attribute.id_att_service}}"
+                                            placeholder="{{'generic.value' | translate}}">
+                                    </mat-form-field>
+                                </ng-template>
+                                <button mat-icon-button class="color-grey ms-2" (click)="deleteAttribute(service.id_service, attribute.id_att_service)"
+                                    ngbTooltip="{{'sitesManagement.deleteAttribute' | translate}}"
+                                    [attr.aria-label]="'sitesManagement.deleteAttribute' | translate">
+                                    <mat-icon class="w-auto">close</mat-icon>
+                                </button>
+                            </div>
+                            <ng-template #readOnly>
+                                <div *ngIf = "attribute.is_attachment; else notAttachment">
+                                    <a *ngIf="attribute.attachment; else notAttachmentUploaded" href="javascript:void(0)" class="d-flex text-decoration-none" (click)="downloadAttachment(attribute)">
+                                        <div class="bg-light-grey px-3 py-4 w-100" ngbTooltip="{{'generic.downloadFile' | translate}}">{{attribute.value}}
+                                        <mat-icon class="ms-2">file_download</mat-icon></div>
+                                    </a>
+                                    <ng-template #notAttachmentUploaded>
+                                        <div class="bg-light-grey px-3 py-4 w-100">{{'generic.notAttachmentUploaded' | translate}}</div>
+                                    </ng-template>
+                                </div>
+                                <ng-template #notAttachment>
+                                    <div class="bg-light-grey px-3 py-4 w-100">{{attribute.value}}</div>
+                                </ng-template>
+                            </ng-template>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="d-flex">
+                    <button *ngIf="editingServices.get(service.id_service) || servicesInsertion"  (click)="getAttributes(service)"mat-stroked-button color="primary" class="border-primary py-2">
+                        {{'attributes.add' | translate}}
+                        <mat-icon class="w-auto">add</mat-icon>
+                    </button>
+                    <button *ngIf="editingServices.get(service.id_service)" (click)="onCancelServiceUpdates(service)" mat-stroked-button color="primary" class="border-primary py-2 me-2 ms-auto">
+                        {{'buttons.cancel' | translate}}
+                    </button>
+                    <button *ngIf="editingServices.get(service.id_service)" (click)="onSaveService(service)" mat-raised-button color="primary" class="py-2">
+                        {{'buttons.save' | translate}}
+                    </button>
+                </div>
+            </form>
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

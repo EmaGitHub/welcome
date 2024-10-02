@@ -1,0 +1,12 @@
+.mat-column {
+    &-activity, &-site, &-date, &-time {
+        flex: 1 0 auto;
+        width: 22.5%;
+
+    }
+
+    &-actions {
+        flex: 1 0 auto;
+        width: 10%;
+    }
+}

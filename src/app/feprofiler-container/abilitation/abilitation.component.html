@@ -1,0 +1,16 @@
+<div>
+    <p>Invoke a resource (isUserEnabled) of the solution profiling API, can be filtered by activity and territory </p>
+</div>
+<div class="form-inline" style="margin-bottom: 10px;">
+    <div class="form-group">
+        <enel-button type="primary"  [buttonText]="'Verify permission'" (click)="isUserEnabled()"></enel-button>
+        <enel-button type="tertiary"  [buttonText]="'Clear'" (click)="clear()" style="margin-left: 10px;"></enel-button>
+        <enel-dropdown style="margin-left: 10px;" (onSelectedOption)="selectActivity($event)" [options] = activities [placeholder] = "'Seleziona'">
+        </enel-dropdown>
+        <enel-dropdown  style="margin-left: 10px;" (onSelectedOption)="selectTerritory($event)" [options] = territories [placeholder] = "'Seleziona'">
+        </enel-dropdown>
+    </div>
+    <div class="form-group" style="margin-left: 10px;">Result: <enel-badge *ngIf="resultType" style="padding-left: 5px" [type]="resultType" [value]="result"></enel-badge></div>
+</div>
+
+

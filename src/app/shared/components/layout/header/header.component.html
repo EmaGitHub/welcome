@@ -1,0 +1,29 @@
+<div class="header d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex flex-row justify-content-between align-content-center align-items-center">
+                <button mat-button [routerLink]="'/home'">
+                    <img class="header-logo" src="assets/images/enel-logo.png" alt="{{'header.img.enel' | translate}}" [attr.aria-label]="'header.img.enel' | translate" />
+                </button>
+                <div class="d-flex flex-row align-content-center justify-content-between align-items-center">
+                    <button mat-button class="px-4" (click)="goTo('https://enel.service-now.com/me')">
+                        <img src="assets/images/Capa2.svg" alt="{{'header.img.me' | translate}}" [attr.aria-label]="'header.img.me' | translate">
+                    </button>
+                    <div class="px-3 mt-1">
+                        <mat-select [(value)]="selectedLanguage" class="header-language" aria-label="{{'header.selectLanguage' | translate}}" role="combobox" (selectionChange)="changeLanguage()">
+                            <mat-option value="it" role="option">
+                                IT
+                            </mat-option>
+                            <mat-option value="en" role="option">
+                                EN
+                            </mat-option>
+                            <mat-option value="es" role="option">
+                                ES
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

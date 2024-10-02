@@ -1,0 +1,53 @@
+<div class="bg-light-grey py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex align-items-center mb-3">
+                    <mat-icon color="primary" class="ei-info me-2"></mat-icon>
+                    <div class="fw-bold">{{'generic.siteServices' | translate}}</div>
+                </div>
+
+                <ngb-accordion [closeOthers]="true" #accordion class="custom-accordion" [activeIds]="'service-'+0">
+                    <ngb-panel *ngFor="let service of newSiteServices; let i = index" [id]="'service-'+i">
+
+                        <!-- PANEL HEADER -->
+                        <ng-template ngbPanelHeader let-opened="opened">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <mat-icon color="primary" class="ei-{{service.icon}} me-2"></mat-icon>
+                                <h4 class="flex-grow-1 fw-bold fs-5">{{service.name | titlecase}}</h4>
+                                <button ngbPanelToggle mat-icon-button color="primary"
+                                        ngbTooltip="{{(opened ? 'generic.close' : 'generic.open') | translate}}"
+                                        [attr.aria-label]="(opened ? 'generic.close' : 'generic.open') | translate">
+                                    <mat-icon class="w-auto h-auto transition" [class.rotateX180]="opened">expand_more</mat-icon>
+                                </button>
+                            </div>
+                        </ng-template>
+
+                        <!-- PANEL CONTENT -->
+                        <ng-template ngbPanelContent>
+                            <div class="row">
+                                <div *ngFor="let attribute of service.attributeServiceList" class="col-12 col-md-6 mb-4">
+                                    <div class="fw-bold">{{attribute.name | titlecase}}</div>
+                                    <div class="mt-1">{{attribute.value | titlecase}}</div>
+                                </div>
+                                <p *ngIf="!service?.attributeServiceList?.length" class="color-grey">{{'generic.noAttributes' | translate}}</p>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-end py-4">
+                <button mat-stroked-button color="primary" class="border-primary py-2 me-2" (click)="stepper.previous()">{{'buttons.back' | translate}}</button>
+                <button mat-raised-button color="primary" class="py-2" (click)="confirm()">{{'buttons.continue' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

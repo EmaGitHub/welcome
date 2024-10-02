@@ -1,0 +1,170 @@
+<mat-expansion-panel (keyup)="onEnter($event)">
+    <mat-expansion-panel-header class="container mb-4">
+        <mat-panel-title class="fw-bold fs-3">
+            {{'strenneManagement.filters' | translate}}
+            <mat-icon color="primary" class="strenne-filter me-2"></mat-icon>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container mb-4">
+        <hr size="1" color="#d9d9d9">
+        <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <div class="d-flex flex-column">
+                        <app-strenne-search-receiver #strennaReceiver [controlName]="'receiverControl'"
+                            textLabel="{{'strennaForm.recipient' | translate}} "
+                            (selectProfile)="handleSelectedReceiver($event)"> </app-strenne-search-receiver>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <app-strenne-input-text #idStrenna textLabel="{{'strennaForm.id' | translate}} "
+                    [elementId]="'idStrenna'"> </app-strenne-input-text>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.isDirector' | translate}}</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="isDirectorSelectedOptionValue"
+                            placeholder="{{'strennaForm.yesNo' | translate}} " id="isDirector">
+                            <mat-option>-</mat-option>
+                            <mat-option value="true">{{'strennaForm.yes' | translate}}</mat-option>
+                            <mat-option value="false">{{'strennaForm.no' | translate}}</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <div class="d-flex flex-column">
+                        <app-strenne-search-sender #strennaSender [controlName]="'senderControl'"
+                            textLabel="{{'strennaForm.sender' | translate}} "
+                            (selectProfile)="handleSelectedSender($event)"> </app-strenne-search-sender>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.withdrawalOptions' | translate}}</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="withdrawalSelectedOptionValue"
+                            placeholder="{{'strennaForm.selectWithdrawalOptions' | translate}}" id="withdrawalOption">
+                            <mat-option>-</mat-option>
+                            <mat-option value="accepted">{{'strennaForm.accepted' | translate}}</mat-option>
+                            <mat-option value="donated">{{'strennaForm.donated' | translate}}</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.strennaType' | translate}} </mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedGiftOptionValue"
+                            placeholder="{{'strennaForm.selectType' | translate}} " id="strennaType">
+                            <mat-option>-</mat-option>
+                            <mat-option *ngFor="let option of giftOptions" [value]="option.value"> {{ option.viewValue |
+                                translate }} </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.cumbersome' | translate}}</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedBulkyOptionValue"
+                            placeholder="{{'strennaForm.yesNo' | translate}} " id="cumbersome">
+                            <mat-option>-</mat-option>
+                            <mat-option value="true">{{'strennaForm.yes' | translate}}</mat-option>
+                            <mat-option value="false">{{'strennaForm.no' | translate}}</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.deperisheable' | translate}}</mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedPerishableOptionValue"
+                            placeholder="{{'strennaForm.yesNo' | translate}} " id="deperisheable">
+                            <mat-option>-</mat-option>
+                            <mat-option value="true">{{'strennaForm.yes' | translate}}</mat-option>
+                            <mat-option value="false">{{'strennaForm.no' | translate}}</mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <mat-label class="custom-label">{{'strennaForm.dateOfReceipt' | translate}}</mat-label>
+                <app-strenna-date-picker [controlName]="'dateControlFilter'" #date [elementId]="'date'"
+                    [style]></app-strenna-date-picker>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3 form-group">
+                <mat-label class="custom-label">{{'strennaForm.withdrawalDate' | translate}}</mat-label>
+                <app-strenna-date-picker [controlName]="'dateControlFilter'" #withdrawalDate
+                    [elementId]="'withdrawalDate'"></app-strenna-date-picker>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.status' | translate}} </mat-label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedStatusOptionValue"
+                            placeholder="{{'strennaForm.selectStatus' | translate}} " id="strennaStatus">
+
+                            <mat-option>-</mat-option>
+                            <mat-option *ngFor="let option of statusOptions" [value]="option.value"> {{ option.viewValue
+                                | translate }} </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 form-group" *ngIf="isStrennaAdmin">
+                <div class="col-12 d-flex flex-column">
+                    <mat-label class="custom-label">{{'strennaForm.showsPreviousYears' | translate}}</mat-label>
+
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedYearOptionValue" placeholder="{{'strennaForm.showsPreviousYears' | translate}} " id="previousYears" multiple>
+                            <mat-option *ngFor="let option of previousYears" [value]="option"> {{option}} </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix style="color: #0152e8;">expand_more</mat-icon>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+        <div class="d-grid gap-5 d-md-flex justify-content-md-end">
+            <button mat-raised-button (click)="cleanFilters()" class="py-2 customButtonStyle">{{'buttons.clearFilters' |
+                translate}}
+            </button>
+            <button mat-raised-button color="primary" (click)="getFilteredStrenneList()"
+                class="py-2 customButtonStylePrimary">{{'buttons.apply' | translate}}
+            </button>
+        </div>
+    </div>
+
+</mat-expansion-panel>

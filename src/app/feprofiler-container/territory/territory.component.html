@@ -1,0 +1,31 @@
+<div>
+    <p>Invoke a resource (territories) of the solution profiling API, can be filtered by profile </p>
+</div>
+<div class="form-inline" style="margin-bottom: 10px;">
+    <div class="form-group">
+        <enel-button type="primary" [buttonText]="'Get territories'" (click)="territories()"></enel-button>
+        <enel-button type="tertiary" [buttonText]="'Clear'" (click)="clear()" style="margin-left: 10px; margin-right: 10px"></enel-button>
+        <enel-dropdown (onSelectedOption)="selectElement($event)" [options] = profiles [placeholder] = "'Seleziona'">
+        </enel-dropdown>
+    </div>
+
+</div>
+
+<enel-table *ngIf="data.length!=0" [bordered]="false">
+    <tr slot="thead">
+        <th scope="col"><enel-th>#</enel-th></th>
+        <th scope="col"><enel-th>Territory code</enel-th></th>
+        <th scope="col"><enel-th>Territory code parent</enel-th></th>
+        <th scope="col"><enel-th>Territory description</enel-th></th>
+        <th scope="col"><enel-th>Territory level</enel-th></th>
+        <th scope="col"><enel-th>Activities</enel-th></th>
+    </tr>
+    <tr slot="tbody" *ngFor="let elem of data, let i = index">
+        <td>{{ i }}</td>
+        <td>{{ elem.code }}</td>
+        <td>{{ elem.codeParent }}</td>
+        <td>{{ elem.description }}</td>
+        <td>{{ elem.level }}</td>
+        <td>{{ elem.activities }}</td>
+    </tr>
+</enel-table>

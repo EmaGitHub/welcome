@@ -1,0 +1,75 @@
+.myColumn {
+    background-color: transparent;
+}
+
+.no-border {
+    padding-left: 0px;
+    margin-left: 0px;
+    border-left: 0px;
+}
+
+.container-receiver {
+    width: 20% !important;
+}
+
+.container-id-strenna {
+    width: 5% !important;
+}
+
+.container-director {
+    width: 5% !important;
+}
+
+.container-sender {
+    width: 20% !important;
+}
+
+.container-date {
+    width: 15% !important;
+}
+
+.container-status {
+    align-items: center !important;
+}
+
+.container-icons {
+    width: 20% !important;
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: red;
+}
+
+th.mat-sort-header-button {
+    color: brown;
+}
+
+
+.myPaginator {
+    align-items: center;
+}
+
+.custom-paginator {
+    color: #44484e;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    font-size: 15px;
+}
+
+.mat-paginator-page-size {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.numero-pagina {
+    color: white;
+    background-color: blue ;
+    width: 50px !important;
+    height:50px;
+} 

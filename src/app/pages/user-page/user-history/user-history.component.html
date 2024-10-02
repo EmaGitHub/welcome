@@ -1,0 +1,307 @@
+<app-banner-strenne></app-banner-strenne>
+
+<app-page-title [customRouterLink]="'/user-page'" [linkText]="'strennaForm.goBack' | translate"
+customTitle="userStrenne.historyStrenneTitle"></app-page-title>
+
+  <div class="container">
+  <div style="padding-bottom: 10px;">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header class="container mb-4">
+      <mat-panel-title class="fw-bold fs-3">
+        {{'strenneManagement.filters' | translate}}
+        <mat-icon color="primary" class="strenne-filters me-2"></mat-icon>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="container mb-4">
+      <hr size="1" color="#d9d9d9">
+      <div class="row">
+        <div class="col-md-4 mb-3 form-group">
+          <app-strenne-input-text #idStrenna textLabel="{{'strennaForm.id' | translate}} " [elementId]="'idStrenna'">
+          </app-strenne-input-text>
+        </div>
+        <div class="col-md-4 mb-3 form-group">
+          <app-strenne-search-sender #strennaSender [controlName]="'senderControl'"
+            textLabel="{{'strennaForm.sender' | translate}} " (selectProfile)="handleSelectedSender($event)">
+          </app-strenne-search-sender>
+        </div>
+        <div class="col-md-4 mb-3 form-group">
+          <mat-label class="custom-label">{{'strennaForm.dateOfReceipt' | translate}}</mat-label>
+          <app-strenna-date-picker [controlName]="'dateControlFilter'" #withdrawalDate
+            [elementId]="'withdrawalDate'"></app-strenna-date-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3 form-group">
+          <div class="col-12 d-flex flex-column">
+            <mat-label class="custom-label">{{'strennaForm.status' | translate}} </mat-label>
+            <mat-form-field appearance="outline">
+              <mat-select [(ngModel)]="selectedStatusOptionValue"
+                placeholder="{{'strennaForm.selectStatus' | translate}} " id="strennaStatus">
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let option of statusOptions" [value]="option.value"> {{ option.viewValue | translate
+                  }} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="d-grid gap-5 d-md-flex justify-content-md-end" *ngIf="isDesktopView">
+        <button mat-raised-button (click)="cleanFilters()" class="py-2 customButtonStyle">{{'buttons.clearFilters' |
+          translate}}
+        </button>
+        <button mat-raised-button color="primary" (click)="getAllFilteredStrenneForUser()"
+          class="py-2 customButtonStylePrimary">{{'buttons.apply' | translate}}
+        </button>
+      </div>
+      <div class="d-grid gap-5 d-md-flex justify-content-md-end" *ngIf="!isDesktopView">
+        <button mat-raised-button (click)="cleanFilters()"
+          class="py-2 customButtonStyle-mobile">{{'buttons.clearFilters' | translate}}
+        </button>
+        <button mat-raised-button color="primary" (click)="getAllFilteredStrenneForUser()"
+          class="py-2 customButtonStylePrimary-mobile">{{'buttons.apply' | translate}}
+        </button>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</div>
+  <!-- <div class="container mb-4" *ngIf="isDesktopView">
+    <mat-table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+      class="table w-100">
+      <ng-container matColumnDef="id_strenna">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_strenna" style="flex: .7">
+          <p class="custom-label">{{ 'strennaForm.idStrenna' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .7">{{ element.id_strenna }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="sender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <p class="custom-label">{{ 'strennaForm.sender' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.sender }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="perisheable">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="is_perisheable" style="flex: .6">
+          <p class="custom-label">{{ 'strennaForm.deperisheable' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .6">
+          {{ ((element.is_perisheable == null || element.is_perisheable == false)? 'strennaForm.no' :
+          'strennaForm.yes') | translate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: .9">
+          <p class="custom-label">{{ 'strennaForm.dateOfReceipt' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .9">{{ formatData(element.date)}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 1.0">
+          <p class="custom-label">{{ 'strennaForm.status' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: 1.0" [ngStyle]="{'color': 
+        element.status === 'delivered' ? 'green' : 
+        element.status === 'toBeWithdrawn' ? 'blue' : 
+        element.status === 'toBeManaged' ? 'orange' : 
+        element.status === 'refused' ? 'grey' : 
+        element.status === 'donated' ? 'brown' : 
+        element.status === 'cancelled' ? 'red' : 
+        'black'}">
+          <span [ngStyle]="{'color': 
+        element.status === 'delivered' ? 'green' : 
+        element.status === 'toBeWithdrawn' ? 'blue' : 
+        element.status === 'toBeManaged' ? 'orange' : 
+        element.status === 'refused' ? 'grey' : 
+        element.status === 'donated' ? 'brown' : 
+        element.status === 'cancelled' ? 'red' : 
+        'black'}" style="font-size: 12px; vertical-align :middle ; background-color: transparent;">●</span>
+          {{'strennaForm.'+element.status | translate}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="icons">
+        <mat-header-cell *matHeaderCellDef style="flex: .8"></mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .8">
+          <div class="myColumn">
+            <button mat-icon-button ngbTooltip="{{'generic.view' | translate}}"
+              [attr.aria-label]="'generic.view' | translate" (click)="navigateToShowDetails(element.id_strenna)">
+              <mat-icon color="primary" class="strenne-details me-2"></mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row class="no-border" *matHeaderRowDef="displayedColumnsUser"></mat-header-row>
+      <mat-row class="no-border" *matRowDef="let element; columns: displayedColumnsUser;"></mat-row>
+    </mat-table>
+    <div *ngIf="dataSource.data.length == 0" class="w-full text-center pt-2">{{ 'strennaForm.noDataAvelaible' |
+      translate}}</div>
+    <mat-paginator class="custom-paginator mat-paginator-page-size" #paginator [length]="100" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+    </mat-paginator>
+  </div> -->
+
+  <div class="container mb-4" *ngIf="isDesktopView">
+    <mat-table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+      class="table w-100">
+      <ng-container matColumnDef="id_strenna">
+        <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_strenna" style="flex: 0.6;">
+          <p class="custom-label">{{ 'strennaForm.idStrenna' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: 0.6; ">{{ element.id_strenna }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="sender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0.6;">
+          <p class="custom-label">{{ 'strennaForm.sender' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: 0.6;">{{ element.sender }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: 0.6;">
+          <p class="custom-label">{{ 'strennaForm.dateOfReceipt' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: 0.6;">{{ formatData(element.date)}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="perisheable">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="is_perisheable" style="flex: 0.4; ">
+          <p class="custom-label">{{ 'strennaForm.deperisheable' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: 0.4; ">
+          {{ ((element.is_perisheable == false)? 'strennaForm.no' : 'strennaForm.yes') | translate}}
+        </mat-cell>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="bulky">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="is_bulky" style="flex: .6; ">
+          <p class="custom-label">{{'strennaForm.bulky' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .6; ">
+          {{ ((element.is_bulky == false)? 'strennaForm.no' : 'strennaForm.yes') | translate}}
+        </mat-cell>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="flex: .5; ">
+          <p class="custom-label">{{ 'strennaForm.status' | translate}}</p>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngStyle]="{'color': 
+        element.status === 'delivered' ? 'green' : 
+        element.status === 'toBeWithdrawn' ? 'blue' : 
+        element.status === 'toBeManaged' ? 'orange' : 
+        element.status === 'refused' ? 'grey' : 
+        element.status === 'donated' ? 'brown' : 
+        element.status === 'cancelled' ? 'red' : 
+        'black'}" style="flex: .5; ">
+          <span [ngStyle]="{'color': 
+        element.status === 'delivered' ? 'green' : 
+        element.status === 'toBeWithdrawn' ? 'blue' : 
+        element.status === 'toBeManaged' ? 'orange' : 
+        element.status === 'refused' ? 'grey' : 
+        element.status === 'donated' ? 'brown' : 
+        element.status === 'cancelled' ? 'red' : 
+        'black'}" style="font-size: 12px; vertical-align :middle ; background-color: transparent;">●</span>
+          {{'strennaForm.'+element.status | translate}}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="icons">
+        <mat-header-cell *matHeaderCellDef style="flex: .4; "></mat-header-cell>
+        <mat-cell *matCellDef="let element" style="flex: .4; ">
+          <div class="myColumn">
+            <button mat-icon-button ngbTooltip="{{'generic.view' | translate}}"
+              [attr.aria-label]="'generic.view' | translate" (click)="navigateToShowDetails(element.id_strenna)">
+              <mat-icon color="primary" class="strenne-details me-2"></mat-icon>
+  
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row class="no-border" *matHeaderRowDef="displayedColumnsUser"></mat-header-row>
+      <mat-row class="no-border" *matRowDef="let element; columns: displayedColumnsUser;"></mat-row>
+    </mat-table>
+    <div *ngIf="dataSource.data.length == 0" class="w-full text-center pt-2">{{ 'strennaForm.noDataAvelaible' |
+      translate}}</div>
+    <mat-paginator class="custom-paginator mat-paginator-page-size" #paginator [length]="100" [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+    </mat-paginator>
+  </div>
+
+</div>
+
+<!-- Vista Mobile -->
+<div class="container" *ngIf="!isDesktopView">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let element of getItemsForPageMobile()">
+
+      <div class="card border-0 shadow rounded-custom">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="col-10">
+            <span class="text-dark fw-bold w-100">{{'userStrenne.from' | translate}} {{ element.sender }}</span>
+          </div>
+          <div class="col-2 text-end">
+              <button mat-icon-button (click)="navigateToShowDetails(element.id_strenna)">
+                <span class="d-flex justify-content-between">
+                  <mat-icon color="primary" class="strenne-details me-5"></mat-icon>
+                </span>
+              </button>
+          </div>
+        </div>
+
+        <hr>
+        <li class="list-group-item px-3 d-flex justify-content-between">
+          <span class="text-dark">{{'strennaForm.idStrenna' | translate}}</span>
+          <span class="text-dark"> {{element.id_strenna}}</span>
+        </li>
+        <li class="list-group-item px-3 d-flex justify-content-between">
+          <span class="text-dark">{{'strennaForm.deperisheable' | translate}}</span>
+          <span class="text-dark"> {{ ((element.is_perisheable == null || element.is_perisheable == false)?
+            'strennaForm.no' :
+            'strennaForm.yes') | translate}}</span>
+        </li>
+        <li class="list-group-item px-3 d-flex justify-content-between">
+          <span class="text-dark">{{'strennaForm.bulky' | translate}}</span>
+          <span class="text-dark"> {{ ((element.is_bulky == null || element.is_bulky == false)?
+            'strennaForm.no' :
+            'strennaForm.yes') | translate}}</span>
+        </li>
+
+        <li class="list-group-item px-3 d-flex justify-content-between">
+          <span class="text-dark">{{'strennaForm.dateOfReceipt' | translate}}</span>
+          <span class="text-dark">{{formatData(element.date)}}</span>
+        </li>
+        <hr>
+        <li class="list-group-item px-3 d-flex justify-content-between vertical-align-list" [ngStyle]="{'color': 
+                  element.status === 'delivered' ? 'green' : 
+                  element.status === 'toBeWithdrawn' ? 'blue' : 
+                  element.status === 'toBeManaged' ? 'orange' : 
+                  element.status === 'refused' ? 'grey' : 
+                  element.status === 'donated' ? 'brown' : 
+                  element.status === 'cancelled' ? 'red' : 
+                  'black'}">
+          <span class="text-dark">{{ 'strennaForm.status'| translate}}</span>
+          <span>
+            <span [ngStyle]="{'color': 
+                  element.status === 'delivered' ? 'green' : 
+                  element.status === 'toBeWithdrawn' ? 'blue' : 
+                  element.status === 'toBeManaged' ? 'orange' : 
+                  element.status === 'refused' ? 'grey' : 
+                  element.status === 'donated' ? 'brown' : 
+                  element.status === 'cancelled' ? 'red' : 
+                  'black'}" style="font-size: 12px; vertical-align: middle; background-color: transparent;">●</span>
+            {{'strennaForm.'+element.status | translate}}
+          </span>
+        </li>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="dataSource2.filteredData.length == 0" class="w-full text-center pt-2">{{ 'strennaForm.noDataAvelaible' |
+    translate}}</div>
+  <app-custom-pagination [currentPage]="currentPageMobile" [totalPages]="getTotalPagesMobile()"
+    (pageChange)="changePageMobile($event)" (pageSizeChange)="changePageSizeMobile($event)">
+  </app-custom-pagination>
+
+</div>

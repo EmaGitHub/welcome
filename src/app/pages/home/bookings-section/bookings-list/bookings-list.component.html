@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col py-4">
+            <!-- Table -->
+            <mat-table *ngIf="bookings.length; else noResult" [dataSource]="bookings" class="table" role="table">
+                <ng-container *ngFor="let _col of displayedColumns;  let i = index" [matColumnDef]="_col">
+                    <mat-header-cell *matHeaderCellDef>
+                        <span>{{columnDesc[_col] | translate}}</span>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div [ngSwitch]="_col">
+                            <a *ngSwitchCase="'activity'" href="#">{{element[_col]}}</a>
+                            <span *ngSwitchCase="'actions'" class="d-flex">
+                                <button mat-icon-button class="color-primary">
+                                    <mat-icon class="ei-edit"></mat-icon>
+                                </button>
+                                <button mat-icon-button class="color-primary">
+                                    <mat-icon class="ei-bin"></mat-icon>
+                                </button>
+                            </span>
+                            <span *ngSwitchDefault>{{element[_col]}}</span>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <ng-template #noResult>
+                <p class="color-grey">{{'generic.noResult' | translate}}</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

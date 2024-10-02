@@ -1,0 +1,17 @@
+.service-attribute-card {
+  &__value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.rounded-box {
+  background-color: #006F44 ;
+  color: #ffffff;
+  padding: 2px 15px;
+  border-radius: 5px;
+}
+.break {
+  white-space: pre-line;
+}

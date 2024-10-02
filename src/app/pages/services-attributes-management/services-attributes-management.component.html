@@ -1,0 +1,20 @@
+<app-page-title customTitle="saManagement.title" subtitle="saManagement.subtitle"></app-page-title>
+
+<div class="container">
+    <div class="d-flex flex-row">
+        <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)">
+            <mat-tab label="{{'saManagement.category' | translate}}" id="category">
+            </mat-tab>
+            <mat-tab label="{{'saManagement.services' | translate}}" id="service">
+            </mat-tab>
+            <mat-tab label="{{'saManagement.attributes' | translate}}" id="attribute">
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+</div>
+
+<app-category-management *ngIf="selectedTab === 'category'"></app-category-management>
+<app-service-management *ngIf="selectedTab === 'service'"></app-service-management>
+<app-attribute-management *ngIf="selectedTab === 'attribute'"></app-attribute-management>
+

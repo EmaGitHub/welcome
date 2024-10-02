@@ -1,0 +1,10 @@
+<enel-tabs  [currentIndex]="selectedTabIndex">
+    <ng-container *ngFor="let elem of tabElements; index as i">
+        <enel-tab-item-header slot="heading" [tabIndex]="i" (click)="setTabIndex(elem)">{{elem.label}}</enel-tab-item-header>
+    </ng-container>
+    <enel-tab-item-body slot="content" [tabIndex]="selectedTabIndex"><router-outlet></router-outlet></enel-tab-item-body>
+</enel-tabs>
+
+
+
+<app-spinner></app-spinner>

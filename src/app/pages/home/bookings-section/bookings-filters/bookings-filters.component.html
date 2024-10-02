@@ -1,0 +1,47 @@
+<div class="bg-light-grey py-4">
+    <div class="container">
+        <!-- Filters -->
+        <form class="row">
+            <div class="col-md-4 d-flex flex-column">
+                <mat-label class="custom-label">{{'generic.site' | translate}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="{{'generic.selectSite' | translate}}">
+                        <mat-option value="1">Viale Egeo 150, Roma</mat-option>
+                        <mat-option value="2">Via Galileo Ferraris, Napoli</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix color="primary">expand_more</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex flex-column">
+                <mat-label class="custom-label">{{'generic.dateFrom' | translate}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="dateForm" placeholder="gg/mm/aaaa">
+                    <mat-datepicker-toggle matSuffix [for]="dateForm">
+                        <mat-icon matDatepickerToggleIcon color="primary" class="ei-calendar"></mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #dateForm></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 d-flex flex-column">
+                <mat-label class="custom-label">{{'generic.dateTo' | translate}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="dateTo" placeholder="gg/mm/aaaa">
+                    <mat-datepicker-toggle matSuffix [for]="dateTo">
+                        <mat-icon matDatepickerToggleIcon color="primary" class="ei-calendar"></mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #dateTo></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </form>
+
+        <!-- Buttons -->
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-end mt-4">
+                    <button mat-button class="color-dark-grey text-decoration-underline py-2 me-2">{{'buttons.clearFilters' | translate}}</button>
+                    <button mat-stroked-button class="bg-white color-dark-grey py-2">{{'buttons.search' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

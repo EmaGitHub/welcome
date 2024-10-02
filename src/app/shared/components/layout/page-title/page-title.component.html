@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col py-5">
+            <div class="d-flex" *ngIf="!hideBackRouterLink">
+                <a [routerLink]="customRouterLink" class="d-flex align-items-center text-decoration-none">
+                    <mat-icon class="me-2">chevron_left</mat-icon>{{ linkText | translate }} 
+                </a>
+            </div>
+            <h1 class="fw-bold mt-3">{{ customTitle | translate }}</h1>
+            <div class="col-md-12 d-flex justify-content-end align-items-end">
+                <a href="/{{externalLink}}">{{externalLinkText | translate}} <mat-icon
+                        class="primary">{{icon}}</mat-icon></a>
+            </div>
+
+            <p class="color-grey mt-3"> <span id="id-subtitle" *ngIf="customSubtitle;else elseBlock"> </span></p>
+
+            <ng-template #elseBlock>
+                <p class="color-grey mt-3">{{subtitle | translate }}<span *ngIf="href">(<a
+                            href="mailto:{{href}}">{{href}}</a>)</span></p>
+            </ng-template>
+
+        </div>
+    </div>
+</div>

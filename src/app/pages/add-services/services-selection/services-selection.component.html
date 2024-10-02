@@ -1,0 +1,50 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-end">{{'generic.requiredFields' | translate}}</div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="d-flex flex-column">
+                <mat-label class="custom-label">{{'services.service' | translate}}</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput [(ngModel)]="filterBy" placeholder="{{'services.search' | translate}}">
+                    <button matSuffix mat-icon-button color="primary" (click)="filterBy = ''">
+                        <mat-icon class="w-auto">{{filterBy ? 'close' : 'search'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="d-flex align-items-baseline border-bottom py-4">
+                <div class="text-nowrap fw-bold me-3">{{'services.selected' | translate}}: {{newSiteServices.length}}</div>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let service of newSiteServices" class="custom-chip">
+                        {{service.name | titlecase}}
+                        <button mat-icon-button (click)="toggleNewSiteService(service)">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+
+            <div *ngIf="filteredServices?.length; else emptyList" class="row py-4 border-bottom">
+                <div *ngFor="let service of filteredServices" class="col-12 col-sm-6 col-md-3 p-2">
+                    <div class="custom-card d-flex align-items-center cursor-pointer p-3" [class.selected]="isSiteServiceSelected(service.id_service)" matRipple (click)="toggleNewSiteService(service)">
+                        <mat-icon color="primary" class="ei-{{service.icon}} me-2"></mat-icon>
+                        <p class="fw-bold text-ellipsis">{{service.name | titlecase}}</p>
+                    </div>
+                </div>
+            </div>
+            <ng-template #emptyList>
+                <p class="color-grey py-4">{{'generic.emptyList' | translate}}</p>
+            </ng-template>
+
+            <div class="d-flex justify-content-end py-4">
+                <button mat-stroked-button color="primary" class="border-primary py-2 me-2" (click)="router.navigate(['/sites-management'])">{{'buttons.back' | translate}}</button>
+                <button mat-raised-button color="primary" class="py-2" [disabled]="!newSiteServices.length" (click)="stepper.next()">{{'buttons.continue' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

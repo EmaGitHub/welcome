@@ -1,0 +1,22 @@
+<div>
+    <p>Invoke a resource (profiles) of the solution profiling API </p>
+</div>
+<div class="form-inline" style="margin-bottom: 10px;">
+
+    <div class="form-group">
+        <enel-button (keydown.enter)="profiles()" (click)="profiles()" type="primary" [buttonText]="'Get profiles'"></enel-button>
+        <enel-button (keydown.enter)="clear()" (click)="clear()" style="margin-left: 10px" type="tertiary" [buttonText]="'Clear'"></enel-button>
+        <enel-dropdown style="margin-left: 10px" (onSelectedOption)="selectTerritory($event)" [options] = territories [placeholder] = "'Seleziona'">
+        </enel-dropdown>
+    </div>
+</div>
+<enel-table *ngIf="data.length!=0" [bordered]="false">
+    <tr slot="thead">
+        <th scope="col"><enel-th>#</enel-th></th>
+        <th scope="col"><enel-th>Profile Code</enel-th></th>
+    </tr>
+    <tr slot="tbody" *ngFor="let elem of data, let i = index">
+        <td>{{ i }}</td>
+        <td>{{ elem.code }}</td>
+    </tr>
+</enel-table>
